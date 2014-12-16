@@ -1,6 +1,6 @@
 <?php echo "<?php\n"; ?>
 
-class <?php echo $this->moduleClass; ?> extends BaseModule
+class <?php echo $this->moduleClass; ?> extends WebModule
 {
 	public function init()
 	{

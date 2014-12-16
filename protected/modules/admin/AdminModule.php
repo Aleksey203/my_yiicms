@@ -1,6 +1,6 @@
 <?php
 
-class AdminModule extends BaseModule
+class AdminModule extends WebModule
 {
     // Set module name for assets publishing
     public $moduleName = 'admin';

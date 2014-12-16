@@ -7,7 +7,7 @@
  * @package Admin
  * @version $id$
  */
-class BaseModule extends CWebModule {
+class WebModule extends CWebModule {
 
 	public $_assetsUrl = null;
 
