@@ -7,6 +7,7 @@ class AdminConf {
     {
         $modules_admin = array(
             'КАРТА САЙТА'	=>	'pages',
+            //'Тест'		    =>	'test',
             'НОВОСТИ'		=>	'news',
             'КАТАЛОГ'		=>	 array('shop',array( //shop - это название модуля, 'товары' - это вкладка подменю, 'products' - файл для вкладки подменю
                 'товары'				=>	'products',
@@ -104,5 +105,15 @@ class AdminConf {
             'values'		=> 'занчения',
         ));
         return $fieldset;
+    }
+    function getBaseModules()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getModules() as $value) {
+            if (is_array($value)) $array[] = $value[0];
+            else $array[] = $value;
+        }
+        return $array;
     }
 } 

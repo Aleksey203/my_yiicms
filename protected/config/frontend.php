@@ -80,10 +80,11 @@ return CMap::mergeArray(
             ),
         ),
 
+        */
         'params'=>array(
-       		// this is used in Contact page
-       		'controllerPath'=>'frontend',
+            // this is used in Contact page
+            'controllerPath'=>'frontend',
             'cfgName'=>'frontend',
-       	),*/
+        ),
     )
 );

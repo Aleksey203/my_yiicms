@@ -4,7 +4,7 @@ return CMap::mergeArray(
     require_once(dirname(__FILE__) . '/main.php'),
     array(
         // стандартный контроллер
-        'defaultController' => 'Site',
+        'defaultController' => 'Admin',
 
         'homeUrl' => '',
 
@@ -30,7 +30,7 @@ return CMap::mergeArray(
             //Yii::app()->session['returnUrl'] = Y::app()->request->url;
             return true;
         },
-
+*/
         // компоненты
         'components' => array(
 
@@ -50,7 +50,7 @@ return CMap::mergeArray(
 
             'user' => array(
                 'loginUrl' => array('/user/login'),
-            ),
+            ),*/
             'urlManager' => array(
                 'urlFormat' => 'path',
                 'showScriptName' => false,
@@ -66,10 +66,10 @@ return CMap::mergeArray(
                     //BACKEND_NAME.'/<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<module>/<controller>/<action>',
                 ),
             ),
-        ),
-
+            ),
         'params' => array(
             'cfgName' => 'backend',
-        ),*/
-    )
+        ),
+        )
+
 );

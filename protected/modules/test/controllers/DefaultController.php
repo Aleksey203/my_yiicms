@@ -1,7 +1,9 @@
 <?php
 
-class DefaultController extends Controller
+class DefaultController extends BackEndController
 {
+    public $modelName = 'ShopBrands';
+    public $title = '';
 	public function actionIndex()
 	{
 		$this->render('index');

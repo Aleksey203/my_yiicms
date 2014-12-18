@@ -1,10 +1,13 @@
 <?php
 // Register jquery and jquery ui.
-$adminAssetsUrl = Yii::app()->getModule('admin')->assetsUrl;
+$adminAssetsUrl = Yii::app()->getModule('pages')->assetsUrl;
 
 $assetsManager = Yii::app()->clientScript;
 $assetsManager->registerCoreScript('jquery');
 $assetsManager->registerCoreScript('jquery.ui');
+
+// Back Button & Query Library
+$assetsManager->registerScriptFile($adminAssetsUrl.'/vendors/jquery.ba-bbq.min.js');
 
 // Disable jquery-ui default theme
 $assetsManager->scriptMap=array(
@@ -22,8 +25,7 @@ $assetsManager->registerCssFile($adminAssetsUrl.'/css/theme.css');
 Yii::import('ext.jgrowl.Jgrowl');
 Jgrowl::register();*/
 
-// Back Button & Query Library
-$assetsManager->registerScriptFile($adminAssetsUrl.'/vendors/jquery.ba-bbq.min.js');
+
 
 // Init script
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/init.scripts.js');
@@ -59,8 +61,8 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/jquery.hotkeys.js')
         <div class="yui-gc">
             <div class="yui-u first">
                 <?php
-                //$this->widget('application.modules.admin.widgets.SSystemMenu');
-                 $this->widget('zii.widgets.CMenu',array(
+                $this->widget('application.components.sysWidgets.AdminMenu');
+/*                 $this->widget('zii.widgets.CMenu',array(
                     'items'=>array(
                         array('label'=>'Home', 'url'=>array('/site/index')),
                         array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
@@ -68,7 +70,7 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/jquery.hotkeys.js')
                         array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
                         array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
                     ),
-                ));
+                ));*/
                 ?>
             </div>
             <div class="yui-u" id="topRightMenu">

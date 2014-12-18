@@ -5,6 +5,9 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+//$modules = array('pages', 'test');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/sysComponents/AdminConf.php');
+$modules = AdminConf::getBaseModules();
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Моя удобная ЦМС',
@@ -23,11 +26,9 @@ return array(
 		'application.components.sysComponents.*',
 	),
 
-	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-        'admin',
-        'test',
-		'gii'=>array(
+	'modules'=>array_merge($modules, array(
+        // uncomment the following to enable the Gii tool
+        'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'8976',
             'generatorPaths' => array('application.generators'),
@@ -35,7 +36,7 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 
-	),
+	)),
 
 	// application components
 	'components'=>array(
