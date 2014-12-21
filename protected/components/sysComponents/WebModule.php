@@ -11,15 +11,25 @@ class WebModule extends CWebModule {
 
 	public $_assetsUrl = null;
 
-	public function initAdmin()
+/*	public function initAdmin()
 	{
 		$this->setImport(array(
 			'admin.models.*',
 			'admin.components.*',
 			'admin.widgets.*',
 		));
-	}
+	}*/
 
+    public function init()
+    {
+        if(Yii::app()->params['cfgName']=='backend'){
+            $this->controllerPath = $this->basePath.'/controllers/backend';
+        }
+        if(Yii::app()->params['cfgName']=='frontend'){
+            $this->controllerPath = $this->basePath.'/controllers/frontend';
+            //$this->viewPath = $this->basePath.'/views/frontend';
+        }
+    }
 	/**
 	 * Publish admin stylesheets,images,scripts,etc.. and return assets url
 	 *
@@ -52,4 +62,5 @@ class WebModule extends CWebModule {
 	{
 		$this->_assetsUrl = $url;
 	}
+
 }

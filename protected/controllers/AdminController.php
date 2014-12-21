@@ -7,7 +7,7 @@ class AdminController extends BackEndController
 
 	public function actionIndex()
 	{
-        $this->redirect(array('test/item/index'));
+        $this->redirect(array('admin.php/pages/item'));
 		//$this->render('index');
 	}
 }

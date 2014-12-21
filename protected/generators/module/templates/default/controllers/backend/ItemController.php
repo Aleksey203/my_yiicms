@@ -2,7 +2,6 @@
 
 class ItemController extends BackEndController
 {
-    public $modelName = '';
-    public $title = '';
+    public $modelName = '<?php echo ucfirst($this->moduleID); ?>';
 
 }

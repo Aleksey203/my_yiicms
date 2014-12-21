@@ -6,10 +6,13 @@ class <?php echo $this->moduleClass; ?> extends WebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
+        parent::init();
 
 		// import the module-level models and components
 		$this->setImport(array(
 			'<?php echo $this->moduleID; ?>.models.*',
+			'<?php echo $this->moduleID; ?>.models.backend.*',
+			'<?php echo $this->moduleID; ?>.models.frontend.*',
 			'<?php echo $this->moduleID; ?>.components.*',
 		));
 	}

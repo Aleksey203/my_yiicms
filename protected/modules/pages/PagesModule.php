@@ -1,18 +1,17 @@
 <?php
 
-class TestModule extends WebModule
+class PagesModule extends WebModule
 {
 	public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
+
         parent::init();
 		// import the module-level models and components
 		$this->setImport(array(
-			'test.models.*',
-			'test.models.backend.*',
-			'test.models.frontend.*',
-			'test.components.*',
+			'pages.models.*',
+			'pages.components.*',
 		));
 	}
 
