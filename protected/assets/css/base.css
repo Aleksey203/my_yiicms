@@ -52,10 +52,9 @@ a:hover, a:active, a.selected {
 }
 /* Header */
 #hd {
-    background-image:url(../images/panel_bg.png);
-    background-color:#363636;
+    background-image:url(../images/panel_bg.png); background-repeat: repeat-x;
+    background-color: #555555;
     color:#fff;
-    height:26px;
     -moz-box-shadow: 0px 5px 5px #ccc;
     -webkit-box-shadow: 0px 5px 5px #ccc;
     box-shadow: 0px 5px 5px #ccc;
@@ -140,7 +139,13 @@ a:hover, a:active, a.selected {
 #sidebar .sidebarBlock input[type=text], .sidebarBlock select {
     width:200px;
 }
+#adminMenu{}
+#adminMenu li{display: inline-block; padding: 6px 10px 5px;}
+#adminMenu #yw1 li{display: inline-block; padding: 1px 10px 2px;}
 
+#adminMenu li.active{background: #555;}
+#adminMenu li:hover{background: #555;}
+#adminMenu a{color: #fff;}
 #topRightMenu {
     text-align:right;
     margin-top:5px;
@@ -255,4 +260,3 @@ table.orderHistory tr.even {
     background: #F9F9F9;
 }
 
-#yw0 li{display: inline-block; padding: 3px 10px;}

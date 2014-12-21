@@ -59,9 +59,9 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/jquery.hotkeys.js')
 <div id="doc3" class="yui-t6">
     <div id="hd">
         <div class="yui-gc">
-            <div class="yui-u first">
+            <div class="yui-u first" id="adminMenu">
                 <?php
-                $this->widget('application.components.sysWidgets.AdminMenu');
+                $this->widget('application.components.sysWidgets.AdminMenu',array('module'=>$this->module->id));
 /*                 $this->widget('zii.widgets.CMenu',array(
                     'items'=>array(
                         array('label'=>'Home', 'url'=>array('/site/index')),

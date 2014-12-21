@@ -5,6 +5,7 @@
 
 class AdminMenu extends CWidget {
 
+    public  $module;
     private $_items;
 
     /**
@@ -14,10 +15,10 @@ class AdminMenu extends CWidget {
     {
         $modules = AdminConf::getModules();
         $parents = self::generateItems($modules);
-        $childs = self::generateItems($modules,'orders');
+        $childs = self::generateItems($modules,$this->module);
 
         $this->widget('zii.widgets.CMenu', array('items'=>$parents));
-        $this->widget('zii.widgets.CMenu', array('items'=>$childs));
+        if (count($childs)>0) $this->widget('zii.widgets.CMenu', array('items'=>$childs));
     }
 
     protected function generateItems($modules,$child = false)
@@ -34,9 +35,10 @@ class AdminMenu extends CWidget {
             }
         }
         else foreach ($modules as $k => $v) {
-            if (!is_array($v)) $items[] = array('label'=>$k, 'url'=>array('/admin.php/'.$v.'/item'));
+            if (!is_array($v)) $items[] = array('label'=>$k, 'url'=>array('/admin.php/'.$v.'/item'), 'active'=>($v==$this->module));
             else {
-                $items[] = array('label'=>$k, 'url'=>array('/admin.php/'.$v[0].'/'.array_shift($v[1])));
+
+                $items[] = array('label'=>$k, 'url'=>array('/admin.php/'.$v[0].'/'.array_shift($v[1])), 'active'=>($v[0]==$this->module));
             }
         }
         return $items;
