@@ -28,17 +28,17 @@ class AdminMenu extends CWidget {
             foreach ($modules as $k => $v) {
                 if (is_array($v) AND $v[0]==$child)
                     foreach ($v[1] as $label => $url) {
-                        $items[] = array('label'=>$label, 'url'=>array('/admin.php/'.$child.'/'.$url));
+                        $items[] = array('label'=>$label, 'url'=>array('/'.$child.'/'.$url));
                     }
 
 
             }
         }
         else foreach ($modules as $k => $v) {
-            if (!is_array($v)) $items[] = array('label'=>$k, 'url'=>array('/admin.php/'.$v.'/item'), 'active'=>($v==$this->module));
+            if (!is_array($v)) $items[] = array('label'=>$k, 'url'=>array('/'.$v.'/list'), 'active'=>($v==$this->module));
             else {
 
-                $items[] = array('label'=>$k, 'url'=>array('/admin.php/'.$v[0].'/'.array_shift($v[1])), 'active'=>($v[0]==$this->module));
+                $items[] = array('label'=>$k, 'url'=>array('/'.$v[0].'/'.array_shift($v[1])), 'active'=>($v[0]==$this->module));
             }
         }
         return $items;

@@ -6,7 +6,8 @@
 class BackEndController extends CController {
 
     public $layout='//backend/column1';
-
+    public $defaultAction = 'list';
+    public $viewPath = '//backend';
 
     public $menu=array();
     /**
@@ -22,12 +23,23 @@ class BackEndController extends CController {
         if($this->modelName === '') throw new CHttpException(400,'Не задано имя модели в контроллере');
     }
 
-    public function actionIndex()
+    public function actionList()
     {
-        $model = new $this->modelName;
-        $items = $model->model()->findAll();
+        //$model = new $this->modelName;
+        //$items = $model->model()->findAll();
+
+        $dataProvider=new CActiveDataProvider($this->modelName);
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
-        $this->render('index',array( 'model'=>$items));
+        $this->render('list',array( 'dataProvider'=>$dataProvider));
+    }
+
+    public function render($view,$data=null,$return=false)
+    {
+        if ($this->getViewFile($view)) {
+            parent::render($view, $data, $return);
+        } else {
+            parent::render("application.views.backend.{$view}", $data, $return);
+        }
     }
 } 

@@ -17,5 +17,5 @@ else $start = 'yiilite.php';
 define('YII_START', $localPath.'yii/framework/'.$start);
 
 //define('LOAD_ICO','/assets_static/images/front/loading.gif');
-define('BACKEND_NAME','admin');
+define('BACKEND_NAME','admin.php');
 ?>

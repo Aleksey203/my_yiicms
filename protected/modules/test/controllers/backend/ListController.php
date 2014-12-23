@@ -1,6 +1,6 @@
 <?php
 
-class ItemController extends BackEndController
+class ListController extends BackEndController
 {
     public $modelName = 'ShopBrands';
     public $title = '';

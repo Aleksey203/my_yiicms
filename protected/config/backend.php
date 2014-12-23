@@ -53,17 +53,18 @@ return CMap::mergeArray(
             ),*/
             'urlManager' => array(
                 'urlFormat' => 'path',
-                'showScriptName' => false,
+                'showScriptName' => true,
                 'caseSensitive' => false,
                 'rules' => array(
 
                     //BACKEND_NAME.'/igallery/item3/<action:\w+>'=>'/content/item3/<action>', // for mix menu
 
-                    BACKEND_NAME => BACKEND_NAME,
-                    BACKEND_NAME . '/<module:\w+>' => '<module>',
-                    BACKEND_NAME . '/<module:\w+>/<controller:\w+>' => '<module>/<controller>',
-                    BACKEND_NAME . '/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-                    //BACKEND_NAME.'/<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<module>/<controller>/<action>',
+                    //BACKEND_NAME => BACKEND_NAME,
+                    //'pages' => 'pages/item',
+                    '/<module:\w+>' => '<module>/list',
+                    '/<module:\w+>/<controller:\w+>' => '<module>/<controller>',
+                    '/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
+                    '/<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<module>/<controller>/<action>',
                 ),
             ),
             ),

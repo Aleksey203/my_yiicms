@@ -1,5 +1,5 @@
 <?php
-/* @var $this DefaultController */
+/* @var $this ListController */
 
 $this->breadcrumbs=array(
 	$this->module->id,
@@ -15,3 +15,10 @@ in the "<?php echo $this->module->id; ?>" module.
 <p>
 You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
 </p>
+<?php
+
+
+$this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider'=>$dataProvider,
+));
+?>

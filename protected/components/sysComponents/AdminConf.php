@@ -7,7 +7,7 @@ class AdminConf {
     {
         $modules_admin = array(
             'КАРТА САЙТА'	=>	'pages',
-            'ТЕСТ'		    =>	'test',
+            //'ТЕСТ'		    =>	'test',
             'НОВОСТИ'		=>	'news',
             'КАТАЛОГ'		=>	 array('shop',array( //shop - это название модуля, 'товары' - это вкладка подменю, 'products' - файл для вкладки подменю
                 'товары'				=>	'products',
@@ -17,11 +17,11 @@ class AdminConf {
                 'экспорт в файл'		=>	'export',
                 'импорт из файла'		=>	'import',
             )),
-            'МАГАЗИН'		=>	array('orders',array(
+            'МАГАЗИН'		=>	array('test',array(
                 'статистика заказов'	=>	'list',
                 'статусы заказов'		=>	'types',
                 'доставка'				=>	'deliveries',
-                //'оплата'				=>	'payments',
+                'оплата'				=>	'payments',
             )),
             'ПОЛЬЗОВАТЕЛИ'	=>	array('users',array(
                 'пользователи'			=>	'list',

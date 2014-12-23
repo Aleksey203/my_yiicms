@@ -1,6 +1,6 @@
 <?php echo "<?php\n"; ?>
 
-class ItemController extends BackEndController
+class ListController extends BackEndController
 {
     public $modelName = '<?php echo ucfirst($this->moduleID); ?>';
 
