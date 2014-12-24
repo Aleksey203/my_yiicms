@@ -6,6 +6,7 @@
 class AdminMenu extends CWidget {
 
     public  $module;
+    public  $submodule;
     private $_items;
 
     /**
@@ -17,8 +18,8 @@ class AdminMenu extends CWidget {
         $parents = self::generateItems($modules);
         $childs = self::generateItems($modules,$this->module);
 
-        $this->widget('zii.widgets.CMenu', array('items'=>$parents));
-        if (count($childs)>0) $this->widget('zii.widgets.CMenu', array('items'=>$childs));
+        $this->widget('zii.widgets.CMenu', array('items'=>$parents,'htmlOptions'=>array('id'=>'parents')));
+        if (count($childs)>0) $this->widget('zii.widgets.CMenu', array('items'=>$childs,'htmlOptions'=>array('id'=>'childs')));
     }
 
     protected function generateItems($modules,$child = false)
@@ -28,7 +29,7 @@ class AdminMenu extends CWidget {
             foreach ($modules as $k => $v) {
                 if (is_array($v) AND $v[0]==$child)
                     foreach ($v[1] as $label => $url) {
-                        $items[] = array('label'=>$label, 'url'=>array('/'.$child.'/'.$url));
+                        $items[] = array('label'=>$label, 'url'=>array('/'.$child.'/'.$url), 'active'=>($url==$this->submodule));
                     }
 
 
