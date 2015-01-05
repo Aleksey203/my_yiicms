@@ -211,11 +211,14 @@ class ModelCode extends CCodeModel
 
 	public function generateLabels($table)
 	{
+        require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../../components/sysComponents/AdminConf.php');
+        $confLabels = AdminConf::getLabels();
 		$labels=array();
 		foreach($table->columns as $column)
 		{
 			if($this->commentsAsLabels && $column->comment)
 				$labels[$column->name]=$column->comment;
+			elseif (array_key_exists($column->name, $confLabels)) $labels[$column->name] = $confLabels[$column->name];
 			else
 			{
 				$label=ucwords(trim(strtolower(str_replace(array('-','_'),' ',preg_replace('/(?<![A-Z])[A-Z]/', ' \0', $column->name)))));

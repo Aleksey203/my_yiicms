@@ -103,43 +103,6 @@ class <?php echo $modelClass; ?>Base extends <?php echo $this->baseClass."\n"; ?
 		);
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-<?php
-foreach($columns as $name=>$column)
-{
-	if($column->type==='string')
-	{
-		echo "\t\t\$criteria->compare('$name',\$this->$name,true);\n";
-	}
-	else
-	{
-		echo "\t\t\$criteria->compare('$name',\$this->$name);\n";
-	}
-}
-?>
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
 <?php if($connectionId!='db'):?>
 	/**
 	 * @return CDbConnection the database connection used for this class

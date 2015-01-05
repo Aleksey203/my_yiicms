@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/sysComponents/AdminConf.php');
+$models = AdminConf::getAllFrontEndModels();
 
 return CMap::mergeArray(
     require_once(dirname(__FILE__).'/main.php'),

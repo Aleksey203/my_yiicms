@@ -6,6 +6,14 @@
  */
 class ShopBrands extends ShopBrandsBase
 {
+	public function getColumns()
+	{
+		$columns = array(
+        	'id','name','url','title','producer','country','rank','img__image','discount','display'		);
+		return parent::getColumns($columns);
+	}
+
+
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -31,6 +39,7 @@ class ShopBrands extends ShopBrandsBase
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>25),
 		));
 	}
 

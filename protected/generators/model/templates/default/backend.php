@@ -48,6 +48,17 @@
  */
 class <?php echo $modelClass; ?> extends <?php echo $modelClass."Base\n"; ?>
 {
+	public function getColumns()
+	{
+		$columns = array(
+        	<?php $str = ''; foreach($labels as $name=>$label): ?>
+<?php $str .= ",'$name'"; ?>
+<?php endforeach; echo substr($str,1)?>
+		);
+		return parent::getColumns($columns);
+	}
+
+
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -70,6 +81,7 @@ foreach($columns as $name=>$column)
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>25),
 		));
 	}
 

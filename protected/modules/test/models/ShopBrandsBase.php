@@ -68,61 +68,21 @@ class ShopBrandsBase extends ActiveRecord
 		return array(
 			'id' => 'ID',
 			'guid' => 'Guid',
-			'name' => 'Name',
+			'name' => 'название',
 			'url' => 'Url',
 			'title' => 'Title',
 			'keywords' => 'Keywords',
 			'description' => 'Description',
-			'text' => 'Text',
+			'text' => 'текст',
 			'producer' => 'производитель',
 			'country' => 'страна',
-			'rank' => 'Rank',
+			'rank' => 'рейтинг',
 			'rank2' => 'рейтинг для главной',
-			'img' => 'Img',
+			'img' => 'фото',
 			'img2' => 'картинка самого АКБ',
-			'display' => 'Display',
+			'display' => 'показывать',
 			'discount' => 'наценка в процентах',
 		);
-	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('guid',$this->guid,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('keywords',$this->keywords,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('text',$this->text,true);
-		$criteria->compare('producer',$this->producer,true);
-		$criteria->compare('country',$this->country,true);
-		$criteria->compare('rank',$this->rank);
-		$criteria->compare('rank2',$this->rank2);
-		$criteria->compare('img',$this->img,true);
-		$criteria->compare('img2',$this->img2,true);
-		$criteria->compare('display',$this->display);
-		$criteria->compare('discount',$this->discount);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
 	}
 
 	/**

@@ -8,12 +8,6 @@ class TestModule extends WebModule
 		// you may place code here to customize the module or the application
         parent::init();
 		// import the module-level models and components
-		$this->setImport(array(
-			'test.models.*',
-			'test.models.backend.*',
-			'test.models.frontend.*',
-			'test.components.*',
-		));
 	}
 
 	public function beforeControllerAction($controller, $action)

@@ -12,7 +12,7 @@ $assetsManager->scriptMap=array(
 );
 
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/yui-grids/reset-fonts-grids.css');
-$assetsManager->registerCssFile($adminAssetsUrl.'/css/base.css');
+$assetsManager->registerCssFile($adminAssetsUrl.'/css/admin.css');
 
 ?>
 <!doctype html>

@@ -46,7 +46,6 @@ a:hover, a:active, a.selected {
 #content {
     /*padding:10px;*/
     border:1px solid silver;
-    border-radius:5px;
     background: #EEE;
 }
 
@@ -244,3 +243,28 @@ table.orderHistory tr.even {
     background: #F9F9F9;
 }
 
+.grid-view{ text-align: left;}
+
+.grid-view table.items {border-collapse: separate;}
+.grid-view table.items th
+{
+    color: black; border: none; border-collapse: separate; text-align: left; height: 28px;
+    /*	background: url("bg.gif") repeat-x scroll left top white;*/
+    background: #E8E8E8;
+    background:linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
+    background:-o-linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
+    background:-moz-linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
+    background:-webkit-linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
+    background:-ms-linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
+}
+
+.grid-view table.items th a{ color: black; font-weight: bold; text-decoration: none;}
+.grid-view table.items th a:hover{ color: black;}
+.grid-view table.items tr.odd { background: #f0f0f2;}
+.grid-view table.items tr:hover { background: #fffedf!important;}
+.grid-view table.items td{  border-collapse: separate; padding: 2px 5px; border-bottom:1px solid #bbbbbb; border-right:1px solid #cdcdcd; height: 24px;}
+.grid-view table.items td .delete{ display: inline-block;}
+.grid-view .button-column {width: 24px;}
+.grid-view .button-column img {display: inline-block; position: relative; top: 2px;}
+.grid-view .img {text-align: center;}
+.grid-view .img img{max-height: 50px; max-width: 70px;}

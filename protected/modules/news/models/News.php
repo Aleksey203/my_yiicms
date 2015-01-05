@@ -17,6 +17,7 @@
  */
 class News extends ActiveRecord
 {
+    public $columns;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -52,6 +53,7 @@ class News extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'users' => array(self::BELONGS_TO, 'Users', 'user'),
 		);
 	}
 
@@ -64,8 +66,8 @@ class News extends ActiveRecord
 			'id' => 'ID',
 			'date' => 'Date',
 			'user' => 'автор новости',
-			'display' => 'показывать/скрыть',
-			'name' => 'Name',
+			'display' => 'показывать',
+			'name' => 'Название',
 			'text' => 'Text',
 			'title' => 'Title',
 			'url' => 'Url',
@@ -73,6 +75,14 @@ class News extends ActiveRecord
 			'description' => 'Description',
 		);
 	}
+
+    public function getColumns()
+    {
+        $columns = array(
+            'id','name', 'users.email','title','display','url'
+        );
+        return parent::getColumns($columns);
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -96,7 +106,7 @@ class News extends ActiveRecord
 		$criteria->compare('date',$this->date,true);
 		$criteria->compare('user',$this->user,true);
 		$criteria->compare('display',$this->display);
-		$criteria->compare('name',$this->name,true);
+		//$criteria->compare('name',$this->name,true);
 		$criteria->compare('text',$this->text,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('url',$this->url,true);

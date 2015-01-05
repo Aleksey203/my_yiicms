@@ -48,29 +48,5 @@
  */
 class <?php echo $modelClass; ?> extends <?php echo $modelClass."Base\n"; ?>
 {
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-<?php
-foreach($columns as $name=>$column)
-{
-	if($column->type==='string')
-	{
-		echo "\t\t\$criteria->compare('$name',\$this->$name,true);\n";
-	}
-	else
-	{
-		echo "\t\t\$criteria->compare('$name',\$this->$name);\n";
-	}
-}
-?>
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
 
 }

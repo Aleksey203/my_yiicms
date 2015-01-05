@@ -15,7 +15,7 @@ $assetsManager->scriptMap=array(
 );
 
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/yui-grids/reset-fonts-grids.css');
-$assetsManager->registerCssFile($adminAssetsUrl.'/css/base.css');
+$assetsManager->registerCssFile($adminAssetsUrl.'/css/admin.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/forms.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/breadcrumbs/style.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/vendors/jquery_ui/css/custom-theme/jquery-ui-1.8.14.custom.css');

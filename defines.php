@@ -18,4 +18,5 @@ define('YII_START', $localPath.'yii/framework/'.$start);
 
 //define('LOAD_ICO','/assets_static/images/front/loading.gif');
 define('BACKEND_NAME','admin.php');
+define('ROOT_DIR', dirname(__FILE__).'/');
 ?>

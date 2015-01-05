@@ -6,11 +6,12 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 //$modules = array('pages', 'test');
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/sysComponents/AdminConf.php');
+
 $modules = AdminConf::getBaseModules();
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Моя удобная ЦМС',
+	'name'=>'Моя удобная и быстрая админка',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -18,13 +19,13 @@ return array(
 
 
 	// autoloading model and component classes
-	'import'=>array(
+	'import'=>array_merge($models, array(
 		'application.models.*',
 		'application.models.backend.*',
 		'application.models.frontend.*',
 		'application.components.*',
 		'application.components.sysComponents.*',
-	),
+	)),
 
 	'modules'=>array_merge($modules, array(
         // uncomment the following to enable the Gii tool

@@ -22,6 +22,7 @@
  */
 class Pages extends ActiveRecord
 {
+    public $columns;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -68,16 +69,16 @@ class Pages extends ActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'language' => 'Language',
-			'parent' => 'Parent',
+			'language' => 'язык',
+			'parent' => 'родитель',
 			'left_key' => 'Left Key',
 			'right_key' => 'Right Key',
-			'level' => 'Level',
-			'display' => 'Display',
-			'menu' => 'Menu',
-			'module' => 'Module',
-			'name' => 'Name',
-			'text' => 'Text',
+			'level' => 'уровень',
+			'display' => 'показывать',
+			'menu' => 'меню',
+			'module' => 'модуль',
+			'name' => 'название',
+			'text' => 'текст',
 			'url' => 'Url',
 			'title' => 'Title',
 			'keywords' => 'Keywords',
@@ -85,6 +86,12 @@ class Pages extends ActiveRecord
 		);
 	}
 
+    public function getColumns()
+    {
+        $columns = array(
+        'id','name','module','url','title','menu__boolean','display');
+        return parent::getColumns($columns);
+    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -121,6 +128,7 @@ class Pages extends ActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>25),
 		));
 	}
 

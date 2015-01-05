@@ -25,13 +25,9 @@ class BackEndController extends CController {
 
     public function actionList()
     {
-        //$model = new $this->modelName;
-        //$items = $model->model()->findAll();
+        $model = new $this->modelName;
 
-        $dataProvider=new CActiveDataProvider($this->modelName);
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
-        $this->render('list',array( 'dataProvider'=>$dataProvider));
+        $this->render('list',array( 'model'=>$model, 'columns'=>$model->getColumns() ));
     }
 
     public function render($view,$data=null,$return=false)
@@ -42,4 +38,4 @@ class BackEndController extends CController {
             parent::render("application.views.backend.{$view}", $data, $return);
         }
     }
-} 
+}

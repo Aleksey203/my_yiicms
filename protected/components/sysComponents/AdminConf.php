@@ -62,7 +62,7 @@ class AdminConf {
             'cost'			=> 'стоимость',
             'count'			=> 'кол-во',
             'date'			=> 'дата',
-            'description'	=> 'description',
+            'description'	=> 'Description',
             'display'		=> 'показывать',
             'email'			=> 'email',
             'faq_category'	=> 'раздел',
@@ -72,9 +72,11 @@ class AdminConf {
             'forum_category'=> 'разделы',
             'forum_topic'	=> 'темы',
             'id'			=> 'ID',
-            'keywords'		=> 'keywords',
+            'img'			=> 'фото',
+            'keywords'		=> 'Keywords',
             'level'			=> 'уровень',
             'login'			=> 'логин',
+            'language'		=> 'язык',
             'material'		=> 'материал',
             'menu'			=> 'меню',
             'model'			=> 'модель',
@@ -96,10 +98,10 @@ class AdminConf {
             'seo'			=> 'сгенерировать seo-поля',
             'special'		=> 'спец-товар',
             'text'			=> 'текст',
-            'title'			=> 'title',
+            'title'			=> 'Title',
             'total'			=> 'итого',
             'type'			=> 'статус',
-            'url'			=> 'url',
+            'url'			=> 'Url',
             'user'			=> 'пользователь',
             'user_type'		=> 'статус',
             'values'		=> 'занчения',
@@ -113,6 +115,37 @@ class AdminConf {
         foreach (self::getModules() as $value) {
             if (is_array($value)) $array[] = $value[0];
             else $array[] = $value;
+        }
+        return $array;
+    }
+    function getAllModels()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getBaseModules() as $module) {
+            $array[] = 'application.modules.'.$module.'.models.*';
+            $array[] = 'application.modules.'.$module.'.models.backend.*';
+            //$array[] = 'application.modules.'.$module.'.models.frontend.*';
+        }
+        return $array;
+    }
+    function getAllBackEndModels()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getBaseModules() as $module) {
+            $array[] = 'application.modules.'.$module.'.models.*';
+            $array[] = 'application.modules.'.$module.'.models.backend.*';
+        }
+        return $array;
+    }
+    function getAllFrontEndModels()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getBaseModules() as $module) {
+            $array[] = 'application.modules.'.$module.'.models.*';
+            $array[] = 'application.modules.'.$module.'.models.frontend.*';
         }
         return $array;
     }

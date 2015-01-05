@@ -52,6 +52,7 @@
  */
 class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 {
+    public $columns;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -103,6 +104,15 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 		);
 	}
 
+    public function getColumns()
+    {
+        $columns = array(
+        <?php $str = ''; foreach($labels as $name=>$label): ?>
+<?php $str .= ",'$name'"; ?>
+<?php endforeach; echo substr($str,1)?>
+);
+        return parent::getColumns($columns);
+    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -137,6 +147,7 @@ foreach($columns as $name=>$column)
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>25),
 		));
 	}
 
