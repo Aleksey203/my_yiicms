@@ -9,7 +9,7 @@ class ShopBrands extends ShopBrandsBase
 	public function getColumns()
 	{
 		$columns = array(
-        	'id','name','url','title','producer','country','rank','img__image','discount','display'		);
+        	'id','name','url','title','producer','country','rank','img__image','discount__boolean','display'		);
 		return parent::getColumns($columns);
 	}
 
@@ -18,7 +18,7 @@ class ShopBrands extends ShopBrandsBase
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		/*$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('guid',$this->guid,true);
@@ -35,10 +35,10 @@ class ShopBrands extends ShopBrandsBase
 		$criteria->compare('img',$this->img,true);
 		$criteria->compare('img2',$this->img2,true);
 		$criteria->compare('display',$this->display);
-		$criteria->compare('discount',$this->discount);
+		$criteria->compare('discount',$this->discount);*/
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			//'criteria'=>$criteria,
 			'pagination'=>array('pageSize'=>25),
 		));
 	}

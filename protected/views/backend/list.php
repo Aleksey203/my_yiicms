@@ -13,5 +13,7 @@ in the "<?php echo $this->module->id; ?>" module.
 $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$model->search(),
     'columns'=>$columns,
+    'rowHtmlOptionsExpression'=>'array("data-id" => "$data->id")',
+    'htmlOptions'=>array("data-model" => get_class($model)),
 ));
 ?>

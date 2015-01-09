@@ -26,8 +26,15 @@ class BackEndController extends CController {
     public function actionList()
     {
         $model = new $this->modelName;
-
         $this->render('list',array( 'model'=>$model, 'columns'=>$model->getColumns() ));
+    }
+
+    public function actionAjax($id,$name,$value)
+    {
+        $model = $this->loadModel($id);
+        $model->{$name} = $value;
+        $model->save(false);
+
     }
 
     public function render($view,$data=null,$return=false)
@@ -37,5 +44,13 @@ class BackEndController extends CController {
         } else {
             parent::render("application.views.backend.{$view}", $data, $return);
         }
+    }
+
+    public function loadModel($id)
+    {
+        $mName = $this->modelName;
+        $model= $mName::model()->findByPk($id);
+        if($model===null) throw new CHttpException(404,'Запрашиваемая страница не найдена.');
+        return $model;
     }
 }

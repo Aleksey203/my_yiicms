@@ -23,6 +23,7 @@ a:link, a:visited, a.light {
 a:hover, a:active, a.selected {
     color: #444;
 }
+.ta_center{text-align: center!important;}
 #body{min-width: 980px; max-width: 1320px; margin: 0 auto; padding: 0 10px;}
 
 /* Header */
@@ -266,5 +267,12 @@ table.orderHistory tr.even {
 .grid-view table.items td .delete{ display: inline-block;}
 .grid-view .button-column {width: 24px;}
 .grid-view .button-column img {display: inline-block; position: relative; top: 2px;}
+.grid-view .boolean {text-align: center;}
 .grid-view .img {text-align: center;}
 .grid-view .img img{max-height: 50px; max-width: 70px;}
+.grid-view .boolean a, .grid-view .display a {background-repeat: no-repeat;background-position: 50% 50%; display: inline-block; width: 24px; height: 24px;}
+.grid-view .boolean .active {background-image: url("/css/yes.png");}
+.grid-view .boolean .non-active {background-image: url("/css/minus.png");}
+.grid-view .display .active {background-image: url("/css/display.png");}
+.grid-view .display .non-active {background-image: url("/css/nodisplay.png");}
+.grid-view .display img {visibility: hidden;}

@@ -69,6 +69,10 @@ return array(
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
+            // включаем профайлер
+            'enableProfiling'=>true,
+            // показываем значения параметров
+            'enableParamLogging' => true,
 		),
 
 		'errorHandler'=>array(
@@ -88,6 +92,13 @@ return array(
 					'class'=>'CWebLogRoute',
 				),
 				*/
+                /*array(
+                    // направляем результаты профайлинга в ProfileLogRoute (отображается
+                    // внизу страницы)
+                    'class'=>'CProfileLogRoute',
+                    'levels'=>'profile',
+                    'enabled'=>true,
+                ),*/
 			),
 		),
 	),
