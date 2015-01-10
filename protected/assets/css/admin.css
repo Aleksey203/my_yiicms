@@ -249,7 +249,7 @@ table.orderHistory tr.even {
 .grid-view table.items {border-collapse: separate;}
 .grid-view table.items th
 {
-    color: black; border: none; border-collapse: separate; text-align: left; height: 28px;
+    color: black; border: none; border-collapse: separate; text-align: left; padding: 8px 5px 0;
     /*	background: url("bg.gif") repeat-x scroll left top white;*/
     background: #E8E8E8;
     background:linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
@@ -260,6 +260,7 @@ table.orderHistory tr.even {
 }
 
 #yw0_c1{text-align: center; width: 30px;}
+.grid-view table.items th{ border-right:1px solid #cdcdcd; border-collapse: separate;}
 .grid-view table.items th a{ color: black; font-weight: bold; text-decoration: none;}
 .grid-view table.items th a:hover{ color: black;}
 .grid-view table.items tr.odd { background: #f0f0f2;}
@@ -279,3 +280,10 @@ table.orderHistory tr.even {
 .grid-view .display .active {background-image: url("/css/display.png");}
 .grid-view .display .non-active {background-image: url("/css/nodisplay.png");}
 .grid-view .display img {visibility: hidden;}
+
+.grid-view .filters{background: #E8E8E8;}
+.grid-view table.items tr.filters:hover{background: #E8E8E8!important;}
+.grid-view .filters td{border-top: none!important; height: 14px!important; padding-bottom: 5px!important;}
+/*.grid-view .filters td:hover{border-color: #E8E8E8!important;}*/
+
+.grid-view .filters input, .grid-view .filters select {width: 99%; height: 16px!important;}

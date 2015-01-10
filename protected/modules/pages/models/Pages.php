@@ -110,21 +110,21 @@ class Pages extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('language',$this->language);
-		$criteria->compare('parent',$this->parent);
-		$criteria->compare('left_key',$this->left_key,true);
-		$criteria->compare('right_key',$this->right_key,true);
-		$criteria->compare('level',$this->level);
-		$criteria->compare('display',$this->display);
+		//$criteria->compare('id',$this->id);
+		//$criteria->compare('language',$this->language);
+		//$criteria->compare('parent',$this->parent);
+		//$criteria->compare('left_key',$this->left_key,true);
+		//$criteria->compare('right_key',$this->right_key,true);
+		//$criteria->compare('level',$this->level);
+		//$criteria->compare('display',$this->display);
 		$criteria->compare('menu',$this->menu);
 		$criteria->compare('module',$this->module,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('text',$this->text,true);
+		//$criteria->compare('text',$this->text,true);
 		$criteria->compare('url',$this->url,true);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('keywords',$this->keywords,true);
-		$criteria->compare('description',$this->description,true);
+		//$criteria->compare('keywords',$this->keywords,true);
+		//$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

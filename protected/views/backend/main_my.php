@@ -12,8 +12,11 @@ $assetsManager->scriptMap=array(
 );
 
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/yui-grids/reset-fonts-grids.css');
+$assetsManager->registerCssFile($adminAssetsUrl.'/extensions/highslide/highslide.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/admin.css');
 
+$assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/highslide/highslide-full.js');
+$assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/highslide_conf.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/admin.js');
 ?>
 <!doctype html>

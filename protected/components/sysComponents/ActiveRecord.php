@@ -57,31 +57,12 @@ class ActiveRecord extends CActiveRecord {
                 $name = array_shift(explode('__',$column));
                 $type = array_pop(explode('__',$column));
                 if ($type == 'boolean') {
-/*                    $labels = $this->attributeLabels();
-                    $columns[$k] =  array(
-                        'class' => 'CButtonColumn',
-                        'template'=>'{true}{false}',
-                        'header' => $labels[$name],
-                        'buttons' => array(
-                            'true' => array(
-                                'url' => 'Yii::app()->createUrl("/display/$data->id")',
-                                'imageUrl'=>'/css/yes.png',
-                                'label'=>'Сменить',
-                                'visible'=>'$data->'.$name.'==1',
-                            ),
-                            'false' => array(
-                                'url' => 'Yii::app()->createUrl("/nodisplay/$data->id")',
-                                'imageUrl'=>'/css/minus.png',
-                                'label'=>'Сменить',
-                                'visible'=>'$data->'.$name.'==0',
-                            ),
-                        ),
-                    );*/
                     $columns[$k] =  array(
                         'name' => $name,
                         'headerHtmlOptions' => array('class'=>'ta_center'),
                         'htmlOptions' => array('class'=>'boolean'),
                         'type' => 'html',
+                        'filter'=>array(1=> 'Да', 0=> 'Нет'),
                         'value'=>function ($data,$row,$name) {
                                 $class = get_class($data);
                                 $name = $name->name;
@@ -97,13 +78,13 @@ class ActiveRecord extends CActiveRecord {
                     $columns[$k] =  array(
                         'name' => $name,
                         'htmlOptions' => array('class'=>'img'),
-                        'type' => 'html',
-                        //'value' => '<a href="/files/shop_products/$data->id/img/$data->img" onclick="return hs.expand(this)" class=" "><img src="/files/shop_products/$data->id/img/a-$data->img" class="img" title="просмотр картинки"></a>',
+                        'type' => 'raw',
+                        'filter' => false,
                         'value'=>function ($data,$row,$name) {
                                 $class = get_class($data);
                                 $name = $name->name;
                                 if (is_file(ROOT_DIR.'files/'.$class.'/'.$data->id.'/'.$name.'/a-'.$data->$name))
-                                    return '<a href="/files/'.$class.'/'.$data->id.'/'.$name.'/'.$data->$name.'" onclick="return hs.expand(this)" class=" "><img src="/files/'.$class.'/'.$data->id.'/'.$name.'/a-'.$data->$name.'" title="просмотр картинки"></a>';
+                                    return CHtml::link('<img src="/files/'.$class.'/'.$data->id.'/'.$name.'/a-'.$data->$name.'" title="просмотр картинки">','/files/'.$class.'/'.$data->id.'/'.$name.'/'.$data->$name, array('onclick' => 'return hs.expand(this)', 'class'=>'highslide'));
                                 else return '';
                             }
                     );
@@ -116,6 +97,7 @@ class ActiveRecord extends CActiveRecord {
                     'value' => '$data->'.$column,
                     'htmlOptions' => array('data-name'=>$column, 'class'=>($column=='id')?'id':'post'),
                 );
+                if ($column=='id') $columns[$k]['filter']=false;
             }
         }
         if ($nodelete === false) {

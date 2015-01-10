@@ -92,13 +92,13 @@ return array(
 					'class'=>'CWebLogRoute',
 				),
 				*/
-                /*array(
+                array(
                     // направляем результаты профайлинга в ProfileLogRoute (отображается
                     // внизу страницы)
                     'class'=>'CProfileLogRoute',
                     'levels'=>'profile',
                     'enabled'=>true,
-                ),*/
+                ),
 			),
 		),
 	),

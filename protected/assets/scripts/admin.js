@@ -16,7 +16,7 @@ $(document).ready(function(){
             i.setSelectionRange && i.setSelectionRange(value.length,value.length);
 		}
 	});
-	$('.items td input').live('keydown', function(e) {
+	$('.items td.post input').live('keydown', function(e) {
 		var i = $(this);
 		//был нажат Enter или Tab
 		if (e.keyCode==13 || e.keyCode==9) {
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			i.closest('td').html(i.data('value'));
 		}
 	});
-	$('.items td input').live('blur', function() {
+	$('.items td.post input').live('blur', function() {
 		if (sendRequest) applyChanges($(this));
 	});
 	//функция применения изменений для быстрого редактирования
@@ -82,6 +82,10 @@ $(document).ready(function(){
             }
         });
         return false;
+    });
+
+    $(".grid-view .highslide").live('click',function(){
+        return hs.expand(this);
     });
 
 	//УДАЛЕНИЕ id

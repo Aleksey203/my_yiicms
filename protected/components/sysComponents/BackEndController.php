@@ -25,7 +25,10 @@ class BackEndController extends CController {
 
     public function actionList()
     {
-        $model = new $this->modelName;
+        $model = new $this->modelName('search');
+        $model->unsetAttributes();
+        if (!empty($_GET[$this->modelName]))
+            $model->attributes = $_GET[$this->modelName];
         $this->render('list',array( 'model'=>$model, 'columns'=>$model->getColumns() ));
     }
 

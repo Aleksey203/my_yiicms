@@ -1,0 +1,9 @@
+hs.graphicsDir = '/assets/476193e6/extensions/highslide/graphics/';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-black';
+hs.wrapperClassName = 'dark borderless controls-in-heading';
+hs.fadeInOut = true;
+hs.showCredits = false;
+hs.dimmingOpacity = 0.75;
+hs.allowMultipleInstances = false;
+hs.headingEval = 'this.a.title';
