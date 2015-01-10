@@ -11,10 +11,12 @@ $(document).ready(function(){
 				width = td.width(),
 				name = td.attr('name'),
 				value = td.html();
-			td.width(width).html('<input value="'+value.replace('"',"&quot;")+'" />').find('input').focus().width(width-6).data('value',value);
+			//td.width(width).html('<input value="'+value.replace('"',"&quot;")+'" />').find('input').focus().width(width-6).data('value',value);
+            var i = td.width(width).html('<input value="'+value.replace(/["]/g,'&quot;')+'" />').find('input').focus().width(width-6).data('value',value).get(0);
+            i.setSelectionRange && i.setSelectionRange(value.length,value.length);
 		}
 	});
-	$('.table td input').live('keydown', function(e) {
+	$('.items td input').live('keydown', function(e) {
 		var i = $(this);
 		//был нажат Enter или Tab
 		if (e.keyCode==13 || e.keyCode==9) {
@@ -32,11 +34,11 @@ $(document).ready(function(){
 			i.closest('td').html(i.data('value'));
 		}
 	});
-	$('.table td input').live('blur', function() {
+	$('.items td input').live('blur', function() {
 		if (sendRequest) applyChanges($(this));
 	});
 	//функция применения изменений для быстрого редактирования
-	function applyChanges(i) {
+	function applyChanges_old(i) {
 		var m = i.closest('table').data('module'),
 			td = i.closest('td'),
 			name = td.attr('name'),
@@ -46,6 +48,18 @@ $(document).ready(function(){
 		td.html(value);
 		if (value!=oldVal) $.get("/admin.php", {'m':m,'u':'post','id':id,'name':name,'value':value});
 	}
+
+    //функция применения изменений для быстрого редактирования
+    function applyChanges(i) {
+        var url = i.closest('.grid-view').data('url'),
+            id = i.closest('tr').data('id'),
+            td = i.closest('td'),
+            name = td.data('name'),
+            value = i.val(),
+            oldVal = i.data('value');
+        td.html(value);
+        if (value!=oldVal) $.get( "/admin.php/" + url + "/ajax", {'id':id,'name':name,'value':value} );
+    }
 
 	//ПЕРЕКЛЮЧАТЕЛИ
 	$(".grid-view .active").live('click',function(){

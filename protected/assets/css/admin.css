@@ -259,12 +259,15 @@ table.orderHistory tr.even {
     background:-ms-linear-gradient(top , #F1F1F1 0px, #E8E8E8 100%);
 }
 
+#yw0_c1{text-align: center; width: 30px;}
 .grid-view table.items th a{ color: black; font-weight: bold; text-decoration: none;}
 .grid-view table.items th a:hover{ color: black;}
 .grid-view table.items tr.odd { background: #f0f0f2;}
 .grid-view table.items tr:hover { background: #fffedf!important;}
 .grid-view table.items td{  border-collapse: separate; padding: 2px 5px; border-bottom:1px solid #bbbbbb; border-right:1px solid #cdcdcd; height: 24px;}
 .grid-view table.items td .delete{ display: inline-block;}
+.grid-view table.items .id{ font-weight: bold ; color: #676767 ; text-align: center;}
+.grid-view table.items td input { border: 1px solid #b3b3b3; color: #333; margin: 0; font: 12px/13px Arial; height: 24px; padding: 0 0 0 3px;}
 .grid-view .button-column {width: 24px;}
 .grid-view .button-column img {display: inline-block; position: relative; top: 2px;}
 .grid-view .boolean {text-align: center;}

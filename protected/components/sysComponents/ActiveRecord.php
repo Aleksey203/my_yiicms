@@ -30,16 +30,6 @@ class ActiveRecord extends CActiveRecord {
             if ($column=='nodelete') {unset($columns[$k]); $nodelete = true;}
             elseif ($column=='display') {
                 unset($columns[$k]);
-$js_preview =<<< EOD
-function() {
-    var url = $(this).attr('href');
-    $.get(url, function(response) {
-        alert(response);
-    });
-    return false;
-}
-EOD;
-                $link = CHtml::normalizeUrl(array("ajax","display"=>"3"));
                 array_push($columns, array(
                     'class' => 'CButtonColumn',
                     'template'=>'{display}{nodisplay}',
@@ -118,6 +108,14 @@ EOD;
                             }
                     );
                 }
+            }
+            elseif (!is_array($column) AND strpos($column,'.')>0===false) {
+                $columns[$k] =  array(
+                    'name' => $column,
+                    'type' => 'html',
+                    'value' => '$data->'.$column,
+                    'htmlOptions' => array('data-name'=>$column, 'class'=>($column=='id')?'id':'post'),
+                );
             }
         }
         if ($nodelete === false) {

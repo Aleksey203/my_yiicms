@@ -9,7 +9,7 @@ class ShopBrands extends ShopBrandsBase
 	public function getColumns()
 	{
 		$columns = array(
-        	'id','name','url','title','producer','country','rank','img__image','discount__boolean','display'		);
+        	'id','name','url','title','producer','country','rank','img__image','discount','display'		);
 		return parent::getColumns($columns);
 	}
 
