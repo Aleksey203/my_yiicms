@@ -8,6 +8,7 @@ class BackEndController extends CController {
     public $layout='//backend/column1';
     public $defaultAction = 'list';
     public $viewPath = '//backend';
+    public $modelName;
 
     public $menu=array();
     /**
@@ -40,6 +41,21 @@ class BackEndController extends CController {
 
     }
 
+
+    public function actionDelete($id)
+    {
+        if(Yii::app()->request->isAjaxRequest)
+        {
+            $model = $this->loadModel($id);
+            $path = ROOT_DIR.'files/'.$this->modelName.'/'.$id;
+            if (is_dir($path)) $this->delete_all($path);
+            $model->delete();
+            //$this->setFlash('mod-msg', 'Элемент удален');
+        }
+        else throw new CHttpException(400,'Неверный запрос. Ссылка, по которой вы пришли, неверна или устарела.');
+
+    }
+
     public function render($view,$data=null,$return=false)
     {
         if ($this->getViewFile($view)) {
@@ -55,5 +71,17 @@ class BackEndController extends CController {
         $model= $mName::model()->findByPk($id);
         if($model===null) throw new CHttpException(404,'Запрашиваемая страница не найдена.');
         return $model;
+    }
+
+    public function delete_all($dir,$i = true) {
+        if (is_file($dir)) return unlink($dir);
+        if (!is_dir($dir)) return false;
+        $dh = opendir($dir);
+        while (false!==($file = readdir($dh))) {
+            if ($file=='.' || $file=='..') continue;
+            $this->delete_all($dir.'/'.$file);
+        }
+        closedir($dh);
+        if ($i==true) return rmdir($dir);
     }
 }

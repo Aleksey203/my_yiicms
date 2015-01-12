@@ -247,6 +247,7 @@ table.orderHistory tr.even {
 .grid-view{ text-align: left;}
 
 .grid-view table.items {border-collapse: separate; border-color: #cdcdcd;}
+.grid-view table.items thead{background: #e8e8e8;}
 .grid-view table.items th
 {
     color: black; border: none; border-collapse: separate; text-align: left; padding: 8px 5px 0;
@@ -276,6 +277,7 @@ table.orderHistory tr.even {
 .grid-view table.items tr.odd { background: #f0f0f2;}
 .grid-view table.items tr:hover { background: #fffedf!important;}
 .grid-view table.items td{  border-collapse: separate; padding: 2px 5px; border-bottom:1px solid #bbbbbb; border-right:1px solid #cdcdcd; height: 24px;}
+.grid-view table.items .filters td{ border-top: none!important; border-left: none!important; }
 .grid-view table.items td.display{ text-align: center;}
 .grid-view table.items td .delete{ display: inline-block;}
 .grid-view table.items .id{ font-weight: bold ; color: #676767 ; text-align: center;}

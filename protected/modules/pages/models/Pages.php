@@ -116,7 +116,7 @@ class Pages extends ActiveRecord
 		//$criteria->compare('left_key',$this->left_key,true);
 		//$criteria->compare('right_key',$this->right_key,true);
 		//$criteria->compare('level',$this->level);
-		//$criteria->compare('display',$this->display);
+		$criteria->compare('display',$this->display);
 		$criteria->compare('menu',$this->menu);
 		$criteria->compare('module',$this->module,true);
 		$criteria->compare('name',$this->name,true);

@@ -90,17 +90,17 @@ $(document).ready(function(){
 
 	//УДАЛЕНИЕ id
 	$("table tr td .delete").live('click',function(){
-		if (confirm('подтверите удаление!')) {
+        if (confirm('подтверите удаление!')) {
 		var a = $(this),
-			m = a.closest('table').data('module'),
+            url = a.closest('.grid-view').data('url'),
 			id = a.closest('tr').data('id');
-			$.get("/admin.php", {'m':'_delete','type':'id','module':m,'id':id},
+			$.get("/admin.php/" + url + "/delete", {'id':id},
 				function (data) {
 					if (data) alert(data);
 					else $('tr[data-id="'+id+'"]').remove();
 				}
 			);
-		}
+        }
 		return false;
 	});
 

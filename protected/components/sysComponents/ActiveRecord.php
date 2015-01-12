@@ -117,6 +117,16 @@ class ActiveRecord extends CActiveRecord {
         if ($nodelete === false) {
             array_push($columns,
                 array(
+                    'name' => $name,
+                    'htmlOptions' => array('class'=>'button-column'),
+                    'header' => '',
+                    'type' => 'raw',
+                    'filter' => false,
+                    'value'=>function ($data,$row) {
+                                return CHtml::link('<img src="/css/del.png"/>','#',array('class'=>'delete'));
+                        }
+                )/*,
+                array(
                     'class' => 'CButtonColumn',
                     'template'=>'{delete}',
                     'deleteConfirmation'=>"js:'Запись с ID '+$(this).parent().parent().children(':first-child').text()+' будет удалена! Вы уверены?'",
@@ -127,7 +137,7 @@ class ActiveRecord extends CActiveRecord {
                             'label'=>'Удалить запись',
                         ),
                     ),
-                )
+                )*/
             );
         }
         return $columns;
