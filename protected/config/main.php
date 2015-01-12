@@ -12,7 +12,7 @@ $modules = AdminConf::getBaseModules();
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Моя удобная и быстрая админка',
-
+    'language'=>'ru',
 	// preloading 'log' component
 	'preload'=>array('log'),
 

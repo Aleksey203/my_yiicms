@@ -34,7 +34,7 @@ class ShopBrands extends ShopBrandsBase
 		//$criteria->compare('rank2',$this->rank2);
 		//$criteria->compare('img',$this->img,true);
 		//$criteria->compare('img2',$this->img2,true);
-		//$criteria->compare('display',$this->display);
+		$criteria->compare('display',$this->display);
 		$criteria->compare('discount',$this->discount);
 
 		return new CActiveDataProvider($this, array(

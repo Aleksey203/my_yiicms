@@ -31,10 +31,23 @@ class ActiveRecord extends CActiveRecord {
             elseif ($column=='display') {
                 unset($columns[$k]);
                 array_push($columns, array(
-                    'class' => 'CButtonColumn',
-                    'template'=>'{display}{nodisplay}',
+                    //'class' => 'CButtonColumn',
+                    //'template'=>'{display}{nodisplay}',
+                    'name' => 'display',
+                    'type' => 'html',
+                    'header' => '',
+                    'filterHtmlOptions' => array('class' => 'filter_display'),
                     'htmlOptions'=> array('class' => 'display'),
-                    'buttons' => array(
+                    'filter'=>array(1=> 'Да', 0=> 'Нет'),
+                    'value'=>function ($data,$row) {
+                            if ($data->display==1)
+                                return '<a href="'.CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>0)).'" title="Выключить" class="active"></a>';
+                            elseif ($data->display==0)
+                                return '<a href="'.CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>1)).'" title="Включить" class="non-active"></a>';
+                            else return '';
+                        }
+
+                    /*'buttons' => array(
                         'display' => array(
                             //'url' => 'Yii::app()->createUrl("/".$module."/display/$data->id")',
                             'url' => 'CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>0))',
@@ -50,7 +63,7 @@ class ActiveRecord extends CActiveRecord {
                             'options'=>array('class'=>'non-active'),
                             'visible'=>'$data->display==0',
                         ),
-                    ),
+                    ),*/
                 ));
             }
             elseif (!is_array($column) AND strpos($column,'__')!==false) {
@@ -61,6 +74,7 @@ class ActiveRecord extends CActiveRecord {
                         'name' => $name,
                         'headerHtmlOptions' => array('class'=>'ta_center'),
                         'htmlOptions' => array('class'=>'boolean'),
+                        'filterHtmlOptions' => array('class' => 'filter_boolean'),
                         'type' => 'html',
                         'filter'=>array(1=> 'Да', 0=> 'Нет'),
                         'value'=>function ($data,$row,$name) {
@@ -117,5 +131,15 @@ class ActiveRecord extends CActiveRecord {
             );
         }
         return $columns;
+    }
+
+    public function scopes()
+    {
+        $alias = $this->getTableAlias();
+        return array(
+            'active'              => array('condition'=>$alias.'.display=1'),
+            'orderByName'         => array('order'=>$alias.'.name ASC' ),
+            'orderByEmail'         => array('order'=>$alias.'.email ASC' ),
+        );
     }
 } 

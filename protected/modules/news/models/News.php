@@ -41,7 +41,7 @@ class News extends ActiveRecord
 			array('date, text', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, date, user, display, name, text, title, url, keywords, description', 'safe', 'on'=>'search'),
+			array('id, date, user, display, name, title, url', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +64,7 @@ class News extends ActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
+			'date' => 'дата',
 			'user' => 'автор новости',
 			'display' => 'показывать',
 			'name' => 'Название',
@@ -79,7 +79,14 @@ class News extends ActiveRecord
     public function getColumns()
     {
         $columns = array(
-            'id','name', 'users.email','title','display','url'
+            'id','name',
+            array(
+                'name'   => 'user',
+                'type'   => 'raw',
+                'value'  => '$data->users ? CHtml::encode($data->users->email) : ""',
+                'filter' => CHtml::listData(Users::model()->orderByEmail()->findAll(),'id', 'email')
+            ),
+            'title','display','url','date'
         );
         return parent::getColumns($columns);
     }

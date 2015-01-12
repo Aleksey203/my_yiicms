@@ -39,7 +39,7 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/admin.js');
         <div id="yui-main">
             <?php if (isset($this->pageHeader) && !empty($this->pageHeader)) echo '<h3>'.CHtml::encode($this->pageHeader).'</h3>'; ?>
                 <!-- Main content -->
-                <div id="content" class="yui-g">
+                <div class="yui-g">
                     <!-- <hr /> -->
                     <?php
                     echo $content;
