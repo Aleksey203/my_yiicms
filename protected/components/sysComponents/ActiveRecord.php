@@ -123,7 +123,10 @@ class ActiveRecord extends CActiveRecord {
                     'type' => 'raw',
                     'filter' => false,
                     'value'=>function ($data,$row) {
-                                return CHtml::link('<img src="/css/del.png"/>','#',array('class'=>'delete'));
+                            $title = 'Удалить "';
+                            $title .= (isset($data->name)) ? $data->name : 'запись '.$data->id;
+                            $title .= '"';
+                            return CHtml::link('<img src="/css/del.png"/>','#',array('class'=>'delete','title'=>$title));
                         }
                 )/*,
                 array(
