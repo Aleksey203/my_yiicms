@@ -37,17 +37,6 @@ $(document).ready(function(){
 	$('.items td.post input').live('blur', function() {
 		if (sendRequest) applyChanges($(this));
 	});
-	//функция применения изменений для быстрого редактирования
-	function applyChanges_old(i) {
-		var m = i.closest('table').data('module'),
-			td = i.closest('td'),
-			name = td.attr('name'),
-			id = i.closest('tr').data('id'),
-			value = i.val(),
-			oldVal = i.data('value');
-		td.html(value);
-		if (value!=oldVal) $.get("/admin.php", {'m':m,'u':'post','id':id,'name':name,'value':value});
-	}
 
     //функция применения изменений для быстрого редактирования
     function applyChanges(i) {
@@ -68,6 +57,9 @@ $(document).ready(function(){
             url: a.attr('href'),
             success: function(){
                 a.removeClass('active').addClass('non-active');
+                var old_url = a.attr('href');
+                var new_url = old_url.substring(0,old_url.length-1);
+                a.attr('href',new_url+'1');
             }
         });
 		return false;
@@ -79,6 +71,9 @@ $(document).ready(function(){
             url: a.attr('href'),
             success: function(){
                 a.removeClass('non-active').addClass('active');
+                var old_url = a.attr('href');
+                var new_url = old_url.substring(0,old_url.length-1);
+                a.attr('href',new_url+'0');
             }
         });
         return false;
