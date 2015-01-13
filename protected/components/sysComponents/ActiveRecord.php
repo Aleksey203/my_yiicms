@@ -1,8 +1,6 @@
 <?php
 /** File: ActiveRecord.php Date: 01.12.14 Time: 14:44 */
 
-
-
 class ActiveRecord extends CActiveRecord {
     public function getColumns($columns)
     {
@@ -10,10 +8,12 @@ class ActiveRecord extends CActiveRecord {
         $columns = array(
             'id','name','display'
         );
-
+        $module = Yii::app()->controller->module->id;
+        $controller = Yii::app()->controller->id;
         array_unshift($columns,
             array(
                 'class' => 'CButtonColumn',
+                'header'=>CHtml::link(' ',Yii::app()->createUrl($module.'/'.$controller.'/create'),array('class'=>'create','title'=>'Добавить новую запись')),
                 'template'=>'{edit}',
                 'buttons' => array(
                     'edit' => array(

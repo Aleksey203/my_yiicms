@@ -293,6 +293,7 @@ table.orderHistory tr.even {
 .grid-view .display .active {background-image: url("/css/display.png");}
 .grid-view .display .non-active {background-image: url("/css/nodisplay.png");}
 .grid-view .display img {visibility: hidden;}
+.grid-view .create{background-image: url("/css/plus1.png"); background-repeat: no-repeat;background-position: 50% 50%; display: inline-block; width: 24px; height: 24px;}
 
 .grid-view .filters{background: #E8E8E8;}
 .grid-view table.items tr.filters:hover{background: #E8E8E8!important;}

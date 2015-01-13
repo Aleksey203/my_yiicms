@@ -10,6 +10,7 @@
 class WebModule extends CWebModule {
 
 	public $_assetsUrl = null;
+	public $defaultController = 'list';
 
 /*	public function initAdmin()
 	{

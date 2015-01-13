@@ -26,6 +26,11 @@ class BackEndController extends CController {
 
     public function actionList()
     {
+        $url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
+        $module = Yii::app()->controller->module->id;
+        $controller = Yii::app()->controller->id;
+        $action = Yii::app()->controller->action->id;
+        if ($url!=$module.'/'.$controller.'/'.$action) $this->redirect(array($controller));
         $model = new $this->modelName('search');
         $model->unsetAttributes();
         if (!empty($_GET[$this->modelName]))
