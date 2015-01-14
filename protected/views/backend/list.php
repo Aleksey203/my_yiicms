@@ -16,7 +16,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'selectableRows'    => 0,
     'columns'=>$columns,
     'filter' => $model,
-    'template' => '{pager}{items}{pager}{summary}',
+    'template' => '{pager}'.CHtml::link('Добавить новую запись',Yii::app()->createUrl($this->uniqueId.'/create'),array('class'=>'create button')).'{items}{pager}{summary}',
     'rowHtmlOptionsExpression'=>'array("data-id" => "$data->id")',
     'htmlOptions'=>array("data-model" => get_class($model),"data-url" => $this->uniqueId),
 ));

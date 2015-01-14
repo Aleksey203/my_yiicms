@@ -263,11 +263,12 @@ table.orderHistory tr.even {
 
 .grid-view {padding: 9px 0 0;}
 .grid-view .pager{margin: 10px 0 9px 5px; text-align: left; float: left;}
-.grid-view .pager:first-child{margin: 0 0 9px 5px;}
+.grid-view .pager:first-child{margin: 5px 0 9px 5px;}
 .grid-view .summary { margin: 10px 5px; text-align: right; }
 .grid-view .yiiPager .previous, .grid-view .yiiPager .next { display: none;}
-.grid-view ul.yiiPager a { border-color: #555!important; color: #555; font-weight: bold;}
-.grid-view ul.yiiPager .selected a { background: #555; color: #fff;}
+.grid-view ul.yiiPager a { border-color: #999!important; color: #444; font-weight: bold; border-radius: 3px;}
+.grid-view ul.yiiPager a .ui-button-text{ padding: 0;}
+.grid-view ul.yiiPager .selected a { background: #444; color: #fff; border-color: #444!important;}
 .grid-view ul.yiiPager .selected a:hover { cursor: default;}
 #yw0_c1{text-align: center; width: 30px;}
 .grid-view table.items th, .grid-view table.items td {font-size: 1em;}
@@ -293,7 +294,8 @@ table.orderHistory tr.even {
 .grid-view .display .active {background-image: url("/css/display.png");}
 .grid-view .display .non-active {background-image: url("/css/nodisplay.png");}
 .grid-view .display img {visibility: hidden;}
-.grid-view .create{background-image: url("/css/plus1.png"); background-repeat: no-repeat;background-position: 50% 50%; display: inline-block; width: 24px; height: 24px;}
+.grid-view .button.create{float: right; display: inline-block; color: #444444; margin: 0 10px 10px 0; border: 1px solid #999;}
+.grid-view .items .create{background-image: url("/css/plus1.png"); background-repeat: no-repeat;background-position: 50% 50%; display: inline-block; width: 24px; height: 24px;}
 
 .grid-view .filters{background: #E8E8E8;}
 .grid-view table.items tr.filters:hover{background: #E8E8E8!important;}

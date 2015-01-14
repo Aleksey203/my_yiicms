@@ -304,57 +304,18 @@ function get_href (str) {
 	return arr[1];
 }
 
-/*
+$(function() {
 
-hs.lang = {
-	cssDirection: 'ltr',
-	loadingText : 'Загрузка...',
-	loadingTitle : 'Нажмите для отмены',
-	focusTitle : 'Нажмите, чтобы вынести на передний план',
-	fullExpandTitle : 'Увеличить до реального размера (f)',
-	creditsText : 'Powered by <i>Highslide JS</i>',
-	creditsTitle : 'Go to the Highslide JS homepage',
-	previousText : 'Предыдущее',
-	nextText : 'Следующее',
-	moveText : 'Передвинуть',
-	closeText : 'Закрыть',
-	closeTitle : 'Закрыть (esc)',
-	resizeTitle : 'Изменить размер',
-	playText : 'Слайдшоу',
-	playTitle : 'Слайдшоу (пробел)',
-	pauseText : 'Пауза',
-	pauseTitle : 'Пауза (пробел)',
-	previousTitle : 'Предыдущее (стрелка влево)',
-	nextTitle : 'Следующее (стрелка вправо)',
-	moveTitle : 'Передвинуть',
-	fullExpandText : '1:1',
-	number: 'Изображение %1 из %2',
-	restoreTitle : 'Нажмите для закрытия изображения, нажмите и передвиньте курсор для перемещения. Используйте стрелки для следующего или предыдущего изображения.'
-},
+    $('.button.create').button({
+        icons: {
+            primary: "ui-icon-plus"
+        }
+    });
 
-hs.graphicsDir = '/plugins/highslide/graphics/';
-hs.align = 'center';
-hs.transitions = ['expand', 'crossfade'];
-hs.outlineType = 'rounded-black';
-hs.wrapperClassName = 'dark borderless controls-in-heading';
-hs.fadeInOut = true;
-hs.showCredits = false;
-hs.dimmingOpacity = 0.75;
-hs.allowMultipleInstances = false;
-hs.headingEval = 'this.a.title';
+});
 
-if (hs.addSlideshow) {
-	hs.addSlideshow({
-		interval: 3000,
-		repeat: true,
-		useControls: true,
-		fixedControls: true,
-		overlayOptions: {
-			opacity: .75,
-			position: 'bottom center',
-			hideOnMouseOut: true
-		}
-	});
-}
+$(function() {
 
-*/
+    $('.yiiPager a').button();
+
+});

@@ -7,12 +7,13 @@ $assetsManager->registerCoreScript('jquery');
 $assetsManager->registerCoreScript('jquery.ui');
 
 // Disable jquery-ui default theme
-$assetsManager->scriptMap=array(
+/*$assetsManager->scriptMap=array(
     'jquery-ui.css'=>false,
-);
+);*/
 
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/yui-grids/reset-fonts-grids.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/extensions/highslide/highslide.css');
+$assetsManager->registerCssFile($adminAssetsUrl.'/vendors/jquery_ui/css/custom-theme/jquery-ui-1.8.14.custom.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/admin.css');
 
 $assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/highslide/highslide-full.js');
