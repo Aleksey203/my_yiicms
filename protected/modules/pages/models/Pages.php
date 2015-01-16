@@ -39,7 +39,7 @@ class Pages extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('left_key, right_key, display, menu', 'required'),
+			array('module, name, url', 'required'),
 			array('language, parent, level, display, menu', 'numerical', 'integerOnly'=>true),
 			array('left_key, right_key', 'length', 'max'=>10),
 			array('module', 'length', 'max'=>20),
@@ -91,6 +91,22 @@ class Pages extends ActiveRecord
         $columns = array(
         'id','name','module','url','title','menu__boolean','display');
         return parent::getColumns($columns);
+    }
+
+    public function getFields()
+    {
+        $fields = array(
+            'name'=> array('input c6'),
+            'module'=> array('select c2',AdminConf::getKeysBaseModules()),
+            'menu'=> array('checkbox c1'),
+            'display'=> array('checkbox c2'),
+            'text'=> array('elrte c12'),
+            'url'=> array('input c4'),
+            'title'=> array('input c4'),
+            'keywords'=> array('input c4'),
+            'description'=> array('input c12'),
+        );
+        return parent::getFields($fields);
     }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

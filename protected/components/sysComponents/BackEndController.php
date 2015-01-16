@@ -3,7 +3,7 @@
 
 
 
-class BackEndController extends CController {
+class BackEndController extends Controller {
 
     public $layout='//backend/column1';
     public $defaultAction = 'list';
@@ -36,6 +36,43 @@ class BackEndController extends CController {
         if (!empty($_GET[$this->modelName]))
             $model->attributes = $_GET[$this->modelName];
         $this->render('list',array( 'model'=>$model, 'columns'=>$model->getColumns() ));
+    }
+
+    public function actionCreate()
+    {
+        $this->actionUpdate(true);
+    }
+
+    public function actionUpdate($new = false)
+    {
+        $modelName =Yii::app()->controller->modelName;
+        if ($new === true) {
+            $model = new $modelName;
+            $model->unsetAttributes();
+        }
+        else
+            $model = $modelName::model()->findByPk($_GET['id']);
+
+        if (!$model)
+            throw new CHttpException(404, 'Страница не найдена.');
+
+        //$form = new СForm($model);
+
+        if (Yii::app()->request->isPostRequest)
+        {
+            $model->attributes = $_POST[get_class($model)];
+
+            if ($model->validate())
+            {
+                $model->save();
+                $this->redirect(array(Yii::app()->controller->id));
+            }
+        }
+
+        $this->render('update', array(
+            'model'=>$model,
+            //'form2'=>$form2,
+        ));
     }
 
     public function actionAjax($id,$name,$value)

@@ -85,6 +85,26 @@ class ShopBrandsBase extends ActiveRecord
 		);
 	}
 
+    public function getFields()
+    {
+        $fields = array(
+            'name'=> array('input c3'),
+            //'module'=> array('select c2',AdminConf::getKeysBaseModules()),
+            //'menu'=> array('checkbox c1'),
+            'producer'=> array('input c2'),
+            'country'=> array('input c2'),
+            'rank'=> array('input c1'),
+            'discount'=> array('input c2'),
+            'display'=> array('checkbox c2'),
+            'text'=> array('elrte c12',300),
+            'url'=> array('input c3'),
+            'title'=> array('input c5'),
+            'keywords'=> array('input c4'),
+            'description'=> array('input c12'),
+        );
+        return parent::getFields($fields);
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

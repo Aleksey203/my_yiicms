@@ -13,7 +13,6 @@ class ShopBrands extends ShopBrandsBase
 		return parent::getColumns($columns);
 	}
 
-
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.

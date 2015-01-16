@@ -34,14 +34,13 @@ class News extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user, display', 'required'),
-			array('display', 'numerical', 'integerOnly'=>true),
-			array('user', 'length', 'max'=>10),
+			array('name, url, user', 'required'),
+			array('display, user', 'numerical', 'integerOnly'=>true),
 			array('name, title, url, keywords, description', 'length', 'max'=>255),
 			array('date, text', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, date, user, display, name, title, url', 'safe', 'on'=>'search'),
+			array('date, user, display, name, title, url', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,7 +67,7 @@ class News extends ActiveRecord
 			'user' => 'автор новости',
 			'display' => 'показывать',
 			'name' => 'Название',
-			'text' => 'Text',
+			'text' => 'Текст',
 			'title' => 'Title',
 			'url' => 'Url',
 			'keywords' => 'Keywords',
@@ -91,6 +90,33 @@ class News extends ActiveRecord
         return parent::getColumns($columns);
     }
 
+    public function getFields()
+    {
+        $fields = array(
+            'name'=> array('input c6'),
+            'date'=> array('input c2'),
+            'user'=> array('select c2',array(1=>'admin',2=>'test')),
+            'display'=> array('checkbox c2'),
+            'text'=> array('elrte c12'),
+            'url'=> array('input c4'),
+            'title'=> array('input c4'),
+            'keywords'=> array('input c4'),
+            'description'=> array('input c12'),
+        );
+        return parent::getFields($fields);
+    }
+
+    protected function beforeSave()
+    {
+        if(parent::beforeSave())
+        {
+            if($this->isNewRecord OR $this->date=='0000-00-00 00:00:00')
+                $this->date=date('Y-m-d H:i:s',time());
+            return true;
+        }
+        else
+            return false;
+    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

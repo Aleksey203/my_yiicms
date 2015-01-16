@@ -92,7 +92,10 @@ $(document).ready(function(){
 			$.get("/admin.php/" + url + "/delete", {'id':id},
 				function (data) {
 					if (data) alert(data);
-					else $('tr[data-id="'+id+'"]').remove();
+					else {
+                        $('tr[data-id="'+id+'"]').remove();
+                        $('.summary').html('&nbsp;');
+                    }
 				}
 			);
         }
@@ -319,3 +322,32 @@ $(function() {
     $('.yiiPager a').button();
 
 });
+
+function setupElrteEditor(id, el_clicked, theme, height)
+{
+    $(el_clicked).hide();
+
+    var lang = 'ru';
+    var opts = {
+        lang         : lang,
+        styleWithCSS : false,
+        height       : height,
+        toolbar      : theme
+        /*fmOpen : function(callback) {
+            $('<div />').dialogelfinder({
+                url: '/filemanager/connector',
+                lang: lang,
+                commandsOptions: {
+                    getfile: {
+                        oncomplete: 'destroy'
+                    }
+                },
+                getFileCallback: callback
+            });
+        }*/
+    };
+
+    $('#'+id).elrte(opts);
+
+    return false;
+}

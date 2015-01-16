@@ -118,6 +118,18 @@ class AdminConf {
         }
         return $array;
     }
+
+    function getKeysBaseModules()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getModules() as $value) {
+            if (is_array($value)) $array["$value[0]"] = $value[0];
+            else $array["$value"] = $value;
+        }
+        return $array;
+    }
+
     function getAllModels()
     {
         $array = array();

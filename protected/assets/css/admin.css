@@ -23,6 +23,7 @@ a:link, a:visited, a.light {
 a:hover, a:active, a.selected {
     color: #444;
 }
+textarea { border: 1px solid #b0ad9e; margin: 0; overflow: auto; padding: 0 2px;}
 .ta_center{text-align: center!important;}
 #body{min-width: 980px; max-width: 1320px; margin: 0 auto; padding: 0 10px;}
 
@@ -307,5 +308,67 @@ table.orderHistory tr.even {
 .grid-view .filters .filter_display select, .grid-view .filters .filter_boolean select{width: 52px; height: 16px!important; display: inline-block;}
 .grid-view .filters .filter_display option, .grid-view .filters .filter_boolean option{padding: 0 1px 1px;}
 
+.update{padding: 10px; text-align: left;}
+.update h1{font: 17px Arial;}
+.update .form{margin: 10px 0; border: 1px solid #999; background: #ddd; border-radius: 5px; padding: 10px 0 10px 13px; overflow: hidden;}
+.update .form form{width: 100%;}
+.update .note{}
+.update .row{ float: left; min-height: 52px;}
+.update .required{ font-weight: bold;}
+.update span.required{ color: #ff0000; position: relative; left: -4px;}
+.update label{display: block; height: 15px; margin: 0; overflow: hidden; padding: 0 0 2px;}
+.update .input{}
+.update .input label{}
+.update .input div{padding: 0 19px 0 0;}
+.update .input input{ border: 1px solid #b3b3b3; clear: both; color: #333; font: 12px/25px Arial;
+    height: 25px; margin: 0; padding: 0 0 0 4px; width: 100%;}
+.update .row.checkbox{height: 52px;}
+.update .checkbox label { display: inline-block; margin: 20px 0 0; padding: 2px 19px 2px 0;}
+.update .checkbox input {float: left; margin: 2px 5px 0 0; padding: 0; width: 15px;}
+.update .checkbox div {float: left; margin: 20px 0 0; padding: 2px 0px 2px 0;}
+.update .select{}
+.update .select div{background: #fff; border: 1px solid #b3b3b3; height: 21px; margin: 0 13px 0 0; padding: 3px 3px 0 0;}
+.update .select select{border: none; color: #333; font: 12px/14px Arial; height: 18px; margin: 0; padding: 0; width: 100%;}
+
+.update .row.textarea{padding: 0 0 4px;}
+.update .textarea div{padding: 0 19px 4px 0;}
+.update .textarea textarea{color: #333;  font: 12px/14px Arial;  height: 150px;  margin: 0;  padding: 2px; width: 100%;}
+.update .elrte>div{padding: 0 19px 10px 0;}
+.update .elrte textarea{color: #333;  font: 12px/14px Arial;  margin: 0;  padding: 2px; width: 100%;  height: 150px;}
+.update .elrte .hint a{color: #777; font-weight: bold;}
+.update .elrte .hint a:hover{color: #333;}
+/*.update .c1{width: 78px;}
+.update .c2{width: 156px;}
+.update .c3{width: 234px;}
+.update .c4{width: 312px;}
+.update .c5{width: 390px;}
+.update .c6{width: 468px;}
+.update .c7{width: 546px;}
+.update .c8{width: 624px;}
+.update .c9{width: 702px;}
+.update .c10{width: 780px;}
+.update .c11{width: 858px;}
+.update .c12{width: 936px;}*/
+
+.update .c1{width: 8%;}
+.update .c2{width: 16%;}
+.update .c3{width: 24%;}
+.update .c4{width: 32%;}
+.update .c5{width: 40%;}
+.update .c6{width: 48%;}
+.update .c7{width: 56%;}
+.update .c8{width: 64%;}
+.update .c9{width: 72%;}
+.update .c10{width: 80%;}
+.update .c11{width: 88%;}
+.update .c12{width: 96%;}
+
+.update .buttons{clear: both;}
+.update .form input[type="text"]:focus, .update .form input[type="password"]:focus, .update .form textarea:focus {
+    border-color: rgba(51, 96, 160, 0.80);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 10px rgba(174, 253, 255, 0.60);
+    transition: all 0.2s linear 0s;
+}
 
 
+.el-rte {}

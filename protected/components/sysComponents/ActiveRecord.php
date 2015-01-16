@@ -2,7 +2,7 @@
 /** File: ActiveRecord.php Date: 01.12.14 Time: 14:44 */
 
 class ActiveRecord extends CActiveRecord {
-    public function getColumns($columns)
+    public function getColumns($columns=array())
     {
         if(!isset($columns) OR count($columns)<2)
         $columns = array(
@@ -17,7 +17,7 @@ class ActiveRecord extends CActiveRecord {
                 'template'=>'{edit}',
                 'buttons' => array(
                     'edit' => array(
-                        'url' => 'Yii::app()->createUrl("/edit/$data->id")',
+                        'url' => 'Yii::app()->createUrl("'.$module.'/'.$controller.'/update?id=$data->id")',
                         'imageUrl'=>'/css/pencil.png',
                         'label'=>'Редактировать запись',
                     ),
@@ -146,6 +146,33 @@ class ActiveRecord extends CActiveRecord {
         return $columns;
     }
 
+    public function getFields($fields=array())
+    {
+        $func = array(
+            'input' => 'textField',
+            'textarea' => 'textArea',
+            'elrte' => 'textArea',
+            'select' => 'dropDownList',
+            'checkbox' => 'checkBox',
+            'checkboxlist' => 'checkBoxList',
+            'datetime' => 'dateTimeField',
+            'date' => 'dateField',
+        );
+        if(!isset($fields) OR count($fields)<2)
+            $fields = array(
+                'name'=> array('input c1'),
+                'display'=> array('checkbox c3'),
+            );
+        foreach ($fields as $k => $v) {
+            $array = explode(' ',$v[0]);
+            $array[2] = $func[$array[0]];
+            unset($fields[$k][0]);
+            array_unshift($fields[$k],$array[2]);
+            array_unshift($fields[$k],$array[1]);
+            array_unshift($fields[$k],$array[0]);
+        }
+        return $fields;
+    }
     public function scopes()
     {
         $alias = $this->getTableAlias();
