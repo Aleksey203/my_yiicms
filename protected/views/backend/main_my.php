@@ -14,12 +14,18 @@ $assetsManager->registerCoreScript('jquery.ui');
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/yui-grids/reset-fonts-grids.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/extensions/highslide/highslide.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/extensions/elRTE/css/elrte.min.css');
+$assetsManager->registerCssFile($adminAssetsUrl.'/extensions/elFinder-2/css/elfinder.min.css');
+$assetsManager->registerCssFile($adminAssetsUrl.'/extensions/elFinder-2/css/theme.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/vendors/jquery_ui/css/custom-theme/jquery-ui-1.8.14.custom.css');
 $assetsManager->registerCssFile($adminAssetsUrl.'/css/admin.css');
 
 $assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/highslide/highslide-full.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/elRTE/js/elrte.min.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/elRTE/js/elrte.ru.js');
+$assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/elFinder-2/js/elfinder.min.js');
+$assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/elFinder-2/js/elfinder.ru.js');
+$assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/elFinder-2/js/elfinder.ru.js');
+$assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/elfinder.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/highslide_conf.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/admin.js');
 ?>

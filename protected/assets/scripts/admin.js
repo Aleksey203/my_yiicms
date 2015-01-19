@@ -329,22 +329,16 @@ function setupElrteEditor(id, el_clicked, theme, height)
 
     var lang = 'ru';
     var opts = {
-        lang         : lang,
-        styleWithCSS : false,
+        cssClass: 'el-rte',
         height       : height,
-        toolbar      : theme
-        /*fmOpen : function(callback) {
-            $('<div />').dialogelfinder({
-                url: '/filemanager/connector',
-                lang: lang,
-                commandsOptions: {
-                    getfile: {
-                        oncomplete: 'destroy'
-                    }
-                },
-                getFileCallback: callback
-            });
-        }*/
+        lang         : lang,
+        toolbars: {tb:['save', 'copypaste', 'undoredo', 'style', 'alignment', 'colors', 'indent',
+            'lists', 'format', 'links', 'elements', 'media']},
+        denyTags:[],
+        toolbar: 'tb',
+        allowSource: 1,
+        fmOpen       : editorElfinder
+
     };
 
     $('#'+id).elrte(opts);

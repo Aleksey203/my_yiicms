@@ -22,6 +22,9 @@ class BackEndController extends Controller {
     {
         parent::init();
         if($this->modelName === '') throw new CHttpException(400,'Не задано имя модели в контроллере');
+
+        $this->registerScript("elfinderConnectorUrl = '".$this->createUrl('elfinderConnector')."'",
+            CClientScript::POS_BEGIN);
     }
 
     public function actionList()
@@ -96,6 +99,13 @@ class BackEndController extends Controller {
         }
         else throw new CHttpException(400,'Неверный запрос. Ссылка, по которой вы пришли, неверна или устарела.');
 
+    }
+
+    public function actions() {
+        return array (
+            'elfinderconnector' => 'ext.elFinder-2.actions.elfinderConnector'
+            //'ajaxupload' => 'ext.AjaxUpload.AjaxUploadAction'
+        );
     }
 
     public function render($view,$data=null,$return=false)
