@@ -39,7 +39,7 @@ class ShopBrandsBase extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('guid, url, title, keywords, description, text', 'required'),
+			array('name, url', 'required'),
 			array('rank, rank2, display, discount', 'numerical', 'integerOnly'=>true),
 			array('guid', 'length', 'max'=>36),
 			array('name, url, title, keywords, producer, country, img, img2', 'length', 'max'=>255),
@@ -97,9 +97,10 @@ class ShopBrandsBase extends ActiveRecord
             'discount'=> array('input c2'),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12',300),
-            'url'=> array('input c3'),
-            'title'=> array('input c5'),
-            'keywords'=> array('input c4'),
+            'seo'=> array('checkbox c2'),
+            'url'=> array('input c4'),
+            'title'=> array('input c6'),
+            'keywords'=> array('input c12'),
             'description'=> array('input c12'),
         );
         return parent::getFields($fields);

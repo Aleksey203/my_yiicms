@@ -101,9 +101,10 @@ class Pages extends ActiveRecord
             'menu'=> array('checkbox c1'),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12'),
+            'seo'=> array('checkbox c2'),
             'url'=> array('input c4'),
-            'title'=> array('input c4'),
-            'keywords'=> array('input c4'),
+            'title'=> array('input c6'),
+            'keywords'=> array('input c12'),
             'description'=> array('input c12'),
         );
         return parent::getFields($fields);

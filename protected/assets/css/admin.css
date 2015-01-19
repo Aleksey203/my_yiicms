@@ -372,3 +372,7 @@ table.orderHistory tr.even {
 
 
 .el-rte {}
+
+.errorSummary li{color: red; font: bold 13px "Trebuchet MS";}
+.errorMessage{color: red; font: italic 11px "Trebuchet MS";}
+input.error{border: 1px solid red!important;}

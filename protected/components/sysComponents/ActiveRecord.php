@@ -111,8 +111,7 @@ class ActiveRecord extends CActiveRecord {
                         'htmlOptions' => array('data-name'=>$column),
                     );
                 }
-            }
-            elseif (!is_array($column) AND strpos($column,'.')>0===false) {
+            }         elseif (!is_array($column) AND strpos($column,'.')>0===false) {
                 $columns[$k] =  array(
                     'name' => $column,
                     'type' => 'html',
@@ -189,5 +188,89 @@ class ActiveRecord extends CActiveRecord {
             'orderByName'         => array('order'=>$alias.'.name ASC' ),
             'orderByEmail'         => array('order'=>$alias.'.email ASC' ),
         );
+    }
+
+
+    protected function beforeValidate()
+    {
+        if(parent::beforeValidate())
+        {
+
+            if(isset($_POST['seo'])) {
+                $this->url = self::trunslit($this->name);
+                if (isset($this->title)) $this->title = $this->name;
+                if (isset($this->description)) $this->description = self::description(@$this->text.' '.$this->name);
+                if (isset($this->keywords)) $this->keywords = self::keywords($this->name.' '.@$this->description.' '.@$this->text);
+            }
+            if(isset($this->date)) {
+                if($this->isNewRecord OR $this->date=='0000-00-00 00:00:00')
+                    $this->date=date('Y-m-d H:i:s',time());
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public function trunslit($str){
+        $str = self::strtolower_utf8(trim(strip_tags($str)));
+        $str = str_replace(
+            array('ä','ö','ü','а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я','і','ї','є'),
+            array('a','o','u','a','b','v','g','d','e','e','zh','z','i','i','k','l','m','n','o','p','r','s','t','u','f','h','ts','ch','sch','shch','','y','','e','yu','ya','i','yi','e'),
+            $str);
+        $str = preg_replace('~[^-a-z0-9_.]+~u', '_', $str);	//удаление лишних символов
+        $str = preg_replace('~[-]+~u','-',$str);			//удаление лишних -
+        $str = trim($str,'-');								//обрезка по краям -
+        $str = trim($str,'_');								//обрезка по краям -
+        $str = trim($str,'.');
+        return $str;
+    }
+
+    //зaмена функции strtolower
+    public function strtolower_utf8($str){
+        $large = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','À','Á','Â','Ã','Ä','Å','Æ','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ð','Ñ','Ò','Ó','Ô','Õ','Ö','Ø','Ù','Ú','Û','Ü','Ý','А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я','Є');
+        $small = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','ø','ù','ú','û','ü','ý','а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я','є');
+        return str_replace($large,$small,$str);
+    }
+
+
+    function keywords($str) { //04.02.10 поиск ключевых слов в тексте
+        $keywords = '';
+        if (strlen($str)>0) {
+            $str = preg_replace("/&[\w]+;/", ' ',$str);	//замена символов типа &nbsp; на пробел
+            $str = self::strtolower_utf8(trim(strip_tags($str)));
+            $str = preg_replace('~[^-їієа-яa-z0-9 ]+~u', ' ', $str);
+            $token = strtok($str, ' ');
+            $array = array();
+            while ($token) {
+                $token = trim($token);
+                if (strlen($token)>=4) @$array[$token]++;
+                $token = strtok(' ');
+            }
+            if (count($array)>0) {
+                arsort ($array);
+                foreach ($array as $key=>$value) {
+                    if (strlen($keywords.', '.$key)>255) break;
+                    $keywords.= ', '.$key;
+                }
+                return substr($keywords, 2);
+            }
+        }
+    }
+//генерирует описание из текста
+    function description($str) {
+        $description = '';
+        $str = preg_replace("/&[\w]+;/", ' ',$str);	//замена символов типа &nbsp; на пробел
+        $str = trim(strip_tags($str));
+        $token = strtok($str, ' ');
+        while ($token) {
+            $token = trim($token);
+            if ($token!='') {
+                if (strlen($description.' '.$token)>255) break;
+                $description.= trim($token).' ';
+            }
+            $token = strtok(' ');
+        }
+        return trim($description);
     }
 } 

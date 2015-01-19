@@ -98,25 +98,15 @@ class News extends ActiveRecord
             'user'=> array('select c2',array(1=>'admin',2=>'test')),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12'),
+            'seo'=> array('checkbox c2'),
             'url'=> array('input c4'),
-            'title'=> array('input c4'),
-            'keywords'=> array('input c4'),
+            'title'=> array('input c6'),
+            'keywords'=> array('input c12'),
             'description'=> array('input c12'),
         );
         return parent::getFields($fields);
     }
 
-    protected function beforeSave()
-    {
-        if(parent::beforeSave())
-        {
-            if($this->isNewRecord OR $this->date=='0000-00-00 00:00:00')
-                $this->date=date('Y-m-d H:i:s',time());
-            return true;
-        }
-        else
-            return false;
-    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

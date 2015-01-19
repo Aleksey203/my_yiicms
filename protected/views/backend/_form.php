@@ -33,9 +33,11 @@
         ?>
 
 	<div class="row <?=$params[0].' '.$params[1]?>">
-		<?php echo $form->labelEx($model,$field); ?>
+		<?php if ($field!='seo') echo $form->labelEx($model,$field);
+              else echo CHtml::label('cгенерировать seo-поля','seo');?>
         <div>
-            <?php echo $form->$params[2]($array[0],$array[1],$array[2],@$array[3]); ?>
+            <?php if ($field!='seo') echo $form->$params[2]($array[0],$array[1],$array[2],@$array[3]);
+            else echo CHtml::checkBox('seo',$model->isNewRecord);?>
             <?php if ($params[0]=='elrte') {
                 $height = (@$params[3]) ? $params[3] : 100;
                 ?>
