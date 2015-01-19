@@ -103,6 +103,14 @@ class ActiveRecord extends CActiveRecord {
                             }
                     );
                 }
+                elseif ($type == 'text') {
+                    $columns[$k] =  array(
+                        'name' => $name,
+                        'type' => 'html',
+                        'value' => '$data->'.$name,
+                        'htmlOptions' => array('data-name'=>$column),
+                    );
+                }
             }
             elseif (!is_array($column) AND strpos($column,'.')>0===false) {
                 $columns[$k] =  array(

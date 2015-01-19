@@ -89,7 +89,7 @@ class Pages extends ActiveRecord
     public function getColumns()
     {
         $columns = array(
-        'id','name','module','url','title','menu__boolean','display');
+        'id','name','module__text','url','title','menu__boolean','display');
         return parent::getColumns($columns);
     }
 
