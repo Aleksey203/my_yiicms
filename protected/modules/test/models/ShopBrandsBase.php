@@ -23,6 +23,7 @@
  */
 class ShopBrandsBase extends ActiveRecord
 {
+    public $imgConf = array('m-'=>'resize 800x600','l-'=>'cut 300x250');
 	/**
 	 * @return string the associated database table name
 	 */
@@ -42,6 +43,7 @@ class ShopBrandsBase extends ActiveRecord
 			array('name, url', 'required'),
 			array('rank, rank2, display, discount', 'numerical', 'integerOnly'=>true),
 			array('guid', 'length', 'max'=>36),
+			array('img','file','types'=>'jpg,jpeg,png,gif','allowEmpty'=>true,'on'=>'insert, update'),
 			array('name, url, title, keywords, producer, country, img, img2', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -90,13 +92,13 @@ class ShopBrandsBase extends ActiveRecord
         $fields = array(
             'name'=> array('input c3'),
             //'module'=> array('select c2',AdminConf::getKeysBaseModules()),
-            //'menu'=> array('checkbox c1'),
             'producer'=> array('input c2'),
             'country'=> array('input c2'),
             'rank'=> array('input c1'),
             'discount'=> array('input c2'),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12',300),
+            'img'=> array('img c6',$this->imgConf),
             'seo'=> array('checkbox c3'),
             'url'=> array('input c4'),
             'title'=> array('input c5'),

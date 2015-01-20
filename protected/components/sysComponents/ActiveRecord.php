@@ -2,6 +2,10 @@
 /** File: ActiveRecord.php Date: 01.12.14 Time: 14:44 */
 
 class ActiveRecord extends CActiveRecord {
+    public $imgPath;
+    public $imgRootPath;
+    public $imgConf = array();
+
     public function getColumns($columns=array())
     {
         if(!isset($columns) OR count($columns)<2)
@@ -164,6 +168,7 @@ class ActiveRecord extends CActiveRecord {
             'checkboxlist' => 'checkBoxList',
             'datetime' => 'dateTimeField',
             'date' => 'dateField',
+            'img' => 'fileField',
         );
         if(!isset($fields) OR count($fields)<2)
             $fields = array(
@@ -212,13 +217,64 @@ class ActiveRecord extends CActiveRecord {
             return false;
     }
 
+    protected function beforeSave(){
+        if(!parent::beforeSave())
+            return false;
+        if(($this->scenario=='insert' || $this->scenario=='update') &&
+            ($img=CUploadedFile::getInstance($this,'img'))){
+                $this->img=self::trunslit($img->name);
+        }
+        return true;
+    }
+
+    protected function afterSave(){
+        if(($this->scenario=='insert'  || $this->scenario=='update') &&
+            ($img=CUploadedFile::getInstance($this,'img'))){
+            $this->img=self::trunslit($img->name);
+            $this->imgPath='files/'.get_class($this).'/'.$this->id.'/img/';
+            $this->imgRootPath=Yii::getPathOfAlias('webroot').DIRECTORY_SEPARATOR.$this->imgPath;
+            if (!is_dir($this->imgRootPath)) self::make_dir($this->imgPath);
+                else $this->deleteImg(false); // старую картинку удалим, потому что загружаем новую
+            $img->saveAs($this->imgRootPath.'/'.$this->img);
+            $img = Yii::app()->image->load($this->imgPath.'/'.$this->img);
+            foreach ($this->imgConf as $prefix => $v) {
+                $array = explode(' ',$v);
+                $type = $array[0];
+                $array2 = explode('x',$array[1]);
+                $width = $array2[0];
+                $height = $array2[1];
+                $img->$type($width, $height);
+                $img->save($this->imgPath.'/'.$prefix.$this->img);
+            }
+
+            $img->resize(85, 85);
+            $img->save($this->imgPath.'/a-'.$this->img); // or $image->save('images/small.jpg');
+        }
+        parent::afterSave();
+    }
+
+    protected function beforeDelete(){
+        if(!parent::beforeDelete())
+            return false;
+        if (isset($this->img)) {
+            $this->imgPath='files/'.get_class($this).'/'.$this->id;
+            $this->imgRootPath=Yii::getPathOfAlias('webroot').DIRECTORY_SEPARATOR.$this->imgPath;
+            $this->deleteImg(true); // удалили модель? удаляем и файл
+        }
+        return true;
+    }
+
+    public function deleteImg($i){
+        self::delete_all($this->imgRootPath,$i);
+    }
+
     public function trunslit($str){
         $str = self::strtolower_utf8(trim(strip_tags($str)));
         $str = str_replace(
             array('ä','ö','ü','а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я','і','ї','є'),
             array('a','o','u','a','b','v','g','d','e','e','zh','z','i','i','k','l','m','n','o','p','r','s','t','u','f','h','ts','ch','sch','shch','','y','','e','yu','ya','i','yi','e'),
             $str);
-        $str = preg_replace('~[^-a-z0-9_.]+~u', '_', $str);	//удаление лишних символов
+        $str = preg_replace('~[^-a-z0-9_.]+~u', '-', $str);	//удаление лишних символов
         $str = preg_replace('~[-]+~u','-',$str);			//удаление лишних -
         $str = trim($str,'-');								//обрезка по краям -
         $str = trim($str,'_');								//обрезка по краям -
@@ -272,5 +328,31 @@ class ActiveRecord extends CActiveRecord {
             $token = strtok(' ');
         }
         return trim($description);
+    }
+
+    //29.03.10 создание дерева папок
+    function make_dir ($path) { //$path путь product/2
+        $path = trim($path,'/'); //обрезаем крайние слеши
+        $path = trim($path,'.'); //обрезаем крайние точки
+        $array = explode('/',$path);
+        $dir = ROOT_DIR.'';
+        if (!is_dir ($dir)) if (!mkdir($dir,0777)) return false;
+        foreach ($array as $k=>$v) {
+            $dir.= $v.'/';
+            if (!is_dir ($dir)) if (!mkdir($dir,0777)) return false;
+        }
+        return true;
+    }
+
+    public function delete_all($dir,$i = true) {
+        if (is_file($dir)) return unlink($dir);
+        if (!is_dir($dir)) return false;
+        $dh = opendir($dir);
+        while (false!==($file = readdir($dh))) {
+            if ($file=='.' || $file=='..') continue;
+            self::delete_all($dir.'/'.$file);
+        }
+        closedir($dh);
+        if ($i==true) return rmdir($dir);
     }
 } 

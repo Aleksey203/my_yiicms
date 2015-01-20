@@ -7,6 +7,7 @@
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'post-form',
+    'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 	//'action'=>array(Yii::app()->controller->id.'/update'),
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -33,6 +34,9 @@
 		<?php if ($field!='seo') echo $form->labelEx($model,$field);
               else echo CHtml::label('cгенерировать seo-поля','seo');?>
         <div>
+            <?php if($params[0]=='img' AND $model->img) { ?>
+                <p><?php echo CHtml::encode($model->img); ?></p>
+            <?php } ?>
             <?php if ($field!='seo') echo $form->$params[2]($array[0],$array[1],$array[2],@$array[3]);
             else {
                 echo CHtml::checkBox('seo',$model->isNewRecord);
