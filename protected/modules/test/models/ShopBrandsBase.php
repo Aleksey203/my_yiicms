@@ -97,9 +97,9 @@ class ShopBrandsBase extends ActiveRecord
             'discount'=> array('input c2'),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12',300),
-            'seo'=> array('checkbox c2'),
+            'seo'=> array('checkbox c3'),
             'url'=> array('input c4'),
-            'title'=> array('input c6'),
+            'title'=> array('input c5'),
             'keywords'=> array('input c12'),
             'description'=> array('input c12'),
         );

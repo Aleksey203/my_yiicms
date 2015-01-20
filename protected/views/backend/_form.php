@@ -30,14 +30,17 @@
             $array[] = array('class' => $params[0],'prompt'=>' - - - ','options'=>$selected);
         }
         else $array[]['class']=$params[0];
+        if ($field=='seo') echo '<div class="row c12 toggle">'.CHtml::link('<span>SEO-оптимизация</span>','#', array('id' => 'seo')).'</div>';
         ?>
 
-	<div class="row <?=$params[0].' '.$params[1]?>">
+	<div class="row <?=$params[0].' '.$params[1]?> <?=($field=='url' OR $field=='title' OR $field=='keywords' OR $field=='description' OR $field=='seo')?'seo':''?>">
 		<?php if ($field!='seo') echo $form->labelEx($model,$field);
               else echo CHtml::label('cгенерировать seo-поля','seo');?>
         <div>
             <?php if ($field!='seo') echo $form->$params[2]($array[0],$array[1],$array[2],@$array[3]);
-            else echo CHtml::checkBox('seo',$model->isNewRecord);?>
+            else {
+                echo CHtml::checkBox('seo',$model->isNewRecord);
+            } ?>
             <?php if ($params[0]=='elrte') {
                 $height = (@$params[3]) ? $params[3] : 100;
                 ?>

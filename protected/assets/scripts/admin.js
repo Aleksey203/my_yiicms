@@ -102,6 +102,11 @@ $(document).ready(function(){
 		return false;
 	});
 
+    //SEO-оптимизация
+    $("#seo").live('click',function(){
+        $('.seo').toggle();
+        return false;
+    });
 	/*  выделение + снять выделени + перемещение ********************************
 	tr .level.normal - обычный список
 	tr.select .level.select - выделный ряд

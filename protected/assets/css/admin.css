@@ -314,6 +314,8 @@ table.orderHistory tr.even {
 .update .form form{width: 100%;}
 .update .note{}
 .update .row{ float: left; min-height: 52px;}
+.update .row.toggle{ float: left; min-height: 18px; margin-bottom: 5px;}
+.update .row.seo{display: none;}
 .update .required{ font-weight: bold;}
 .update span.required{ color: #ff0000; position: relative; left: -4px;}
 .update label{display: block; height: 15px; margin: 0; overflow: hidden; padding: 0 0 2px;}
@@ -376,3 +378,7 @@ table.orderHistory tr.even {
 .errorSummary li{color: red; font: bold 13px "Trebuchet MS";}
 .errorMessage{color: red; font: italic 11px "Trebuchet MS";}
 input.error{border: 1px solid red!important;}
+
+#seo{display: block; float: left;  }
+#seo:hover{color: #2c7fa3;}
+#seo span{display: inline-block; border-bottom: 1px dashed #309bbf; font-weight: bold;}
