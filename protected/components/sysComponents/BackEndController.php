@@ -51,7 +51,7 @@ class BackEndController extends Controller {
         $modelName =Yii::app()->controller->modelName;
         if ($new === true) {
             $model = new $modelName;
-            $model->unsetAttributes();
+            //$model->unsetAttributes();
         }
         else
             $model = $modelName::model($modelName)->findByPk($_GET['id']);

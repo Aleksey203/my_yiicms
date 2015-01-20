@@ -26,6 +26,7 @@
             $array[] = array('class' => $params[0],'prompt'=>' - - - ','options'=>$selected);
         }
         elseif ($params[0]=='elrte') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
+        elseif ($params[0]=='checkbox') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
         else $array[]['class']=$params[0];
         if ($field=='seo') echo '<div class="row c12 toggle">'.CHtml::link('<span>SEO-оптимизация</span>','#', array('id' => 'seo')).'</div>';
         ?>
