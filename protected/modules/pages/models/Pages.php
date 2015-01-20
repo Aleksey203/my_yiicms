@@ -98,7 +98,7 @@ class Pages extends ActiveRecord
         $fields = array(
             'name'=> array('input c6'),
             'module'=> array('select c2',AdminConf::getKeysBaseModules()),
-            'menu'=> array('checkbox c1'),
+            'menu'=> array('checkbox c2'),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12'),
             'seo'=> array('checkbox c2'),

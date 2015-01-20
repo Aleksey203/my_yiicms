@@ -25,6 +25,7 @@ a:hover, a:active, a.selected {
 }
 textarea { border: 1px solid #b0ad9e; margin: 0; overflow: auto; padding: 0 2px;}
 .ta_center{text-align: center!important;}
+.clear{clear: both;}
 #body{min-width: 980px; max-width: 1320px; margin: 0 auto; padding: 0 10px;}
 
 /* Header */
@@ -309,8 +310,10 @@ table.orderHistory tr.even {
 .grid-view .filters .filter_display option, .grid-view .filters .filter_boolean option{padding: 0 1px 1px;}
 
 .update{padding: 10px; text-align: left;}
+.update .buttons{float: right; color: #444444; margin: 0 0 0px 0; }
+.update .buttons .button{display: inline-block; color: #444444; margin: 0 0px 0px 5px; border: 1px solid #999;}
 .update h1{font: 17px Arial;}
-.update .form{margin: 10px 0; border: 1px solid #999; background: #ddd; border-radius: 5px; padding: 10px 0 10px 13px; overflow: hidden;}
+.update .form{margin: 15px 0 10px; border: 1px solid #999; background: #ddd; border-radius: 5px; padding: 10px 0 10px 13px; overflow: hidden;}
 .update .form form{width: 100%;}
 .update .note{}
 .update .row{ float: left; min-height: 52px;}

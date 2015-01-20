@@ -97,7 +97,7 @@ class News extends ActiveRecord
             'date'=> array('input c2'),
             'user'=> array('select c2',array(1=>'admin',2=>'test')),
             'display'=> array('checkbox c2'),
-            'text'=> array('elrte c12'),
+            'text'=> array('elrte c12',350),
             'seo'=> array('checkbox c2'),
             'url'=> array('input c4'),
             'title'=> array('input c6'),

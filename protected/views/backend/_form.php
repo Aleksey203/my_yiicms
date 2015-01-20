@@ -2,14 +2,9 @@
 /* @var $this PostController */
 /* @var $model Post */
 /* @var $form CActiveForm */
-/*$this->registerScript("
-    $('textarea.elrte').elrte(".Y::elrteOpts(array('height'=>200)).");
-    //$('.form input[type=text]:first').focus();
-", CClientScript::POS_END );*/
 ?>
 
 <div class="form">
-
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'post-form',
 	//'action'=>array(Yii::app()->controller->id.'/update'),
@@ -29,6 +24,7 @@
             $array[]=$params[3];
             $array[] = array('class' => $params[0],'prompt'=>' - - - ','options'=>$selected);
         }
+        elseif ($params[0]=='elrte') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
         else $array[]['class']=$params[0];
         if ($field=='seo') echo '<div class="row c12 toggle">'.CHtml::link('<span>SEO-оптимизация</span>','#', array('id' => 'seo')).'</div>';
         ?>
@@ -54,9 +50,9 @@
 
 
     <?php } ?>
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>
-	</div>
+	<!--<div class="row buttons">
+		<?php /*//echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить', array('class' => 'button save')); */?>
+	</div>-->
 
 <?php $this->endWidget(); ?>
 
