@@ -1,9 +1,9 @@
 <?php
 /** File: AdminConf.php Date: 16.12.14 Time: 16:04 */
 
-class AdminConf {
+class AdminConf extends CComponent {
 
-    function getModules()
+    public static function getModules()
     {
         $modules_admin = array(
             'КАРТА САЙТА'	=>	'pages',
@@ -41,7 +41,7 @@ class AdminConf {
         );
         return $modules_admin;
     }
-    function getLabels()
+    public static function getLabels()
     {
         $fieldset = array();
 //изначально массив $fieldset строится на массиве модулей
@@ -108,7 +108,7 @@ class AdminConf {
         ));
         return $fieldset;
     }
-    function getBaseModules()
+    public static function getBaseModules()
     {
         $array = array();
 //изначально массив $fieldset строится на массиве модулей
@@ -119,7 +119,7 @@ class AdminConf {
         return $array;
     }
 
-    function getKeysBaseModules()
+    public static function getKeysBaseModules()
     {
         $array = array();
 //изначально массив $fieldset строится на массиве модулей
@@ -130,7 +130,7 @@ class AdminConf {
         return $array;
     }
 
-    function getAllModels()
+    public static function getAllModels()
     {
         $array = array();
 //изначально массив $fieldset строится на массиве модулей
@@ -141,7 +141,7 @@ class AdminConf {
         }
         return $array;
     }
-    function getAllBackEndModels()
+    public static function getAllBackEndModels()
     {
         $array = array();
 //изначально массив $fieldset строится на массиве модулей
@@ -151,7 +151,7 @@ class AdminConf {
         }
         return $array;
     }
-    function getAllFrontEndModels()
+    public static function getAllFrontEndModels()
     {
         $array = array();
 //изначально массив $fieldset строится на массиве модулей
@@ -162,11 +162,4 @@ class AdminConf {
         return $array;
     }
 
-    function getImgSizeName($prefix='')
-    {
-        $array = array('xs-'=>'наименьшая','s-'=>'маленькая','m-'=>'средняя','l-'=>'крупная','xl-'=>'большая','xxl-'=>'наибольшая');
-        if ($prefix=='') return $array;
-        elseif (array_key_exists($prefix,$array)) return $array[$prefix];
-        else return false;
-    }
-} 
+}

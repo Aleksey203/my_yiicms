@@ -107,7 +107,7 @@ class BackEndController extends Controller {
             $model = $this->loadModel($id);
             $path = ROOT_DIR.'files/'.$this->modelName.'/'.$id;
             if (is_dir($path))
-                if (ActiveRecord::delete_all($path)) {
+                if (H::delete_all($path)) {
                     $model->img = '';
                     $model->save();
                 }

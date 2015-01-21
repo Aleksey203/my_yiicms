@@ -34,6 +34,7 @@
         if ($params[0]=='img' OR $params[0]=='file') $class .= ' file';
         ?>
 
+
 	<div class="row <?=$params[0].' '.$params[1]?> <?=$class?>">
 		<?php if ($field!='seo' AND $field!='img') echo $form->labelEx($model,$field);
               elseif ($field=='seo') echo CHtml::label('cгенерировать seo-поля','seo');?>
@@ -55,7 +56,7 @@
                         </div>
                         <?php foreach ($model->imgConf as $k=>$v) { ?>
                             <div>
-                                <a onclick="return hs.expand(this)" href="/files/<?=get_class($model)?>/<?=$model->id;?>/img/<?=$k.$model->img;?>" class=" "><?=AdminConf::getImgSizeName($k);?></a>
+                                <a onclick="return hs.expand(this)" href="/files/<?=get_class($model)?>/<?=$model->id;?>/img/<?=$k.$model->img;?>" class=" "><?=H::getImgSizeName($k);?></a>
                                 <span><?=$v;?></span>
                             </div>
                         <?php } ?>
