@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 //$modules = array('pages', 'test');
 
-$modules = AdminConf::getBaseModules();
+$modules = H::getBaseModules();
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',

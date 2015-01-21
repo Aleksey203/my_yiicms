@@ -28,7 +28,7 @@ class AdminConf extends CComponent {
                 'статусы пользователей'	=>	'types',
                 'дополнительные поля'	=>	'fields',
             )),
-            'НАСТРОЙКИ'		=>	'config',
+            /*'НАСТРОЙКИ'		=>	'config',
             'СЛОВАРЬ'		=>	'languages',
             'ДИЗАЙН'		=>	array('template',array(
                 'стили'					=>	'css',
@@ -37,20 +37,13 @@ class AdminConf extends CComponent {
                 'модули'				=>	'modules',
             )),
             'ЛОГИ'			=>	'logs',
-            'BACKUP'		=>	'_dump',
+            'BACKUP'		=>	'_dump',*/
         );
         return $modules_admin;
     }
     public static function getLabels()
     {
-        $fieldset = array();
-//изначально массив $fieldset строится на массиве модулей
-        foreach (self::getModules() as $key=>$value) {
-            if (is_array($value)) foreach ($value[1] as $k=>$v) $fieldset[$v] = $k;
-            else $fieldset[$value] = $key;
-        }
-//расширение массива $fieldset
-        $fieldset = array_merge ($fieldset, array(
+        $fieldset = array(
             'about'			=> 'описание',
             'address'		=> 'адрес',
             'answer'		=> 'ответ',
@@ -105,61 +98,7 @@ class AdminConf extends CComponent {
             'user'			=> 'пользователь',
             'user_type'		=> 'статус',
             'values'		=> 'занчения',
-        ));
+        );
         return $fieldset;
     }
-    public static function getBaseModules()
-    {
-        $array = array();
-//изначально массив $fieldset строится на массиве модулей
-        foreach (self::getModules() as $value) {
-            if (is_array($value)) $array[] = $value[0];
-            else $array[] = $value;
-        }
-        return $array;
-    }
-
-    public static function getKeysBaseModules()
-    {
-        $array = array();
-//изначально массив $fieldset строится на массиве модулей
-        foreach (self::getModules() as $value) {
-            if (is_array($value)) $array["$value[0]"] = $value[0];
-            else $array["$value"] = $value;
-        }
-        return $array;
-    }
-
-    public static function getAllModels()
-    {
-        $array = array();
-//изначально массив $fieldset строится на массиве модулей
-        foreach (self::getBaseModules() as $module) {
-            $array[] = 'application.modules.'.$module.'.models.*';
-            $array[] = 'application.modules.'.$module.'.models.backend.*';
-            //$array[] = 'application.modules.'.$module.'.models.frontend.*';
-        }
-        return $array;
-    }
-    public static function getAllBackEndModels()
-    {
-        $array = array();
-//изначально массив $fieldset строится на массиве модулей
-        foreach (self::getBaseModules() as $module) {
-            $array[] = 'application.modules.'.$module.'.models.*';
-            $array[] = 'application.modules.'.$module.'.models.backend.*';
-        }
-        return $array;
-    }
-    public static function getAllFrontEndModels()
-    {
-        $array = array();
-//изначально массив $fieldset строится на массиве модулей
-        foreach (self::getBaseModules() as $module) {
-            $array[] = 'application.modules.'.$module.'.models.*';
-            $array[] = 'application.modules.'.$module.'.models.frontend.*';
-        }
-        return $array;
-    }
-
 }

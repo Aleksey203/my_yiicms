@@ -212,7 +212,7 @@ class ModelCode extends CCodeModel
 	public function generateLabels($table)
 	{
         require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../../components/sysComponents/AdminConf.php');
-        $confLabels = AdminConf::getLabels();
+        $confLabels = H::getLabels();
 		$labels=array();
 		foreach($table->columns as $column)
 		{

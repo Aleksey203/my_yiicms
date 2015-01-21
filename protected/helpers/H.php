@@ -101,6 +101,73 @@ class H extends CComponent
         closedir($dh);
         if ($i==true) return rmdir($dir);
     }
+
+    public static function getBaseModules()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (AdminConf::getModules() as $value) {
+            if (is_array($value)) $array[] = $value[0];
+            else $array[] = $value;
+        }
+        return $array;
+    }
+
+    public static function getKeysBaseModules()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (AdminConf::getModules() as $value) {
+            if (is_array($value)) $array["$value[0]"] = $value[0];
+            else $array["$value"] = $value;
+        }
+        return $array;
+    }
+
+    public static function getAllModels()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getBaseModules() as $module) {
+            $array[] = 'application.modules.'.$module.'.models.*';
+            $array[] = 'application.modules.'.$module.'.models.backend.*';
+            //$array[] = 'application.modules.'.$module.'.models.frontend.*';
+        }
+        return $array;
+    }
+    public static function getAllBackEndModels()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getBaseModules() as $module) {
+            $array[] = 'application.modules.'.$module.'.models.*';
+            $array[] = 'application.modules.'.$module.'.models.backend.*';
+        }
+        return $array;
+    }
+    public static function getAllFrontEndModels()
+    {
+        $array = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (self::getBaseModules() as $module) {
+            $array[] = 'application.modules.'.$module.'.models.*';
+            $array[] = 'application.modules.'.$module.'.models.frontend.*';
+        }
+        return $array;
+    }
+
+    public static function getLabels()
+    {
+        $fieldset = array();
+//изначально массив $fieldset строится на массиве модулей
+        foreach (AdminConf::getModules() as $key=>$value) {
+            if (is_array($value)) foreach ($value[1] as $k=>$v) $fieldset[$v] = $k;
+            else $fieldset[$value] = $key;
+        }
+//расширение массива $fieldset
+        $fieldset = array_merge ($fieldset, AdminConf::getLabels());
+        return $fieldset;
+    }
 }
 
 
