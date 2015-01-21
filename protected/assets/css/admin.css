@@ -224,27 +224,44 @@ select {
     color: #79797f
 }
 
-table.orderHistory span.date {
-    color: #969696;
-    font-size: 11px;
+.sprite { background-image: url("/css/sprite.png"); display: inline-block; font-size: 0;}
+.sprite.plus { background-position: -147px -141px;  height: 16px; width: 16px;}
+.button .sprite.plus {  float: left;  margin: 0 10px 0 0;}
+
+.button.green {display:inline-block; border:1px solid #2E9963; border-radius: 5px;
+    background:#50CA8D;
+    background: -webkit-linear-gradient(top, #50CA8D 0%,#25A966 100%);
+    background: -moz-linear-gradient(top, #50CA8D 0%,#25A966 100%);
+    background: -o-linear-gradient(top, #50CA8D 0%,#25A966 100%);
+    background: -ms-linear-gradient(top, #50CA8D 0%,#25A966 100%);
+    background: linear-gradient(top, #50CA8D 0%,#25A966 100%);}
+.button.green:hover {border:1px solid #35B374;
+    background:#59E6A0;
+    background: -webkit-linear-gradient(top, #59E6A0 0%,#41B77B 100%);
+    background: -moz-linear-gradient(top, #59E6A0 0%,#41B77B 100%);
+    background: -o-linear-gradient(top, #59E6A0 0%,#41B77B 100%);
+    background: -ms-linear-gradient(top, #59E6A0 0%,#41B77B 100%);
+    background: linear-gradient(top, #59E6A0 0%,#41B77B 100%);
 }
-table.orderHistory thead {
-    font-weight: bold;
-}
-table.orderHistory tr td {
-    border: 1px solid #c0c0c0;
-}
-table.orderHistory tbody tr:hover {
-    background-color: #cfd6e3;
-    cursor: pointer;
-}
-table.orderHistory tr td {
-    padding: 5px;
-    vertical-align: top;
-}
-table.orderHistory tr.even {
-    background: #F9F9F9;
-}
+.button.green > span {display:inline-block; height:21px; padding:5px 8px 0; color:#fff; border:1px solid #50CA8D; border-radius: 5px;}
+.button.green:hover > span {border:1px solid #59E6A0}
+
+.files { clear: both; padding: 2px 0 0;}
+.files.file { clear: none; float: left; padding: 0 0 7px; width: 96%;}
+.files.file.c6 { width: 48%;}
+.files.file .data { margin: 0 13px 0 -13px; padding: 10px 13px;}
+.files.file .delete { float: right; margin-top: -15px;}
+.files.file .data div.img { background: #fff; border: 1px solid gray; display: block; float: left; height: 100px; margin: 0 10px 0 0;
+    position: relative; text-align: center; width: 100px;}
+.files.file .data input.img { margin-top: 7px;}
+.files.file .data div.img.no_img:hover { background: #50ca8d; cursor: pointer;}
+.files.file .data .img img { max-height: 100px; max-width: 100px; vertical-align: middle;}
+.files.file .data .img span { display: inline-block; line-height: 98px; text-indent: -9999px;}
+.files.file .data .name { font-weight: bold;}
+.files.file .data .desc span { color: #999;}
+.files .add_file {position:relative; margin:3px 0 0; overflow:hidden;}
+.files .add_file>span {padding:2px; margin:0; height:16px; cursor:pointer;}
+.files .add_file input {position:absolute; right:-10px; top:-10px; font-size:100px; opacity:0;}
 
 .grid-view{ text-align: left;}
 

@@ -23,7 +23,7 @@
  */
 class ShopBrandsBase extends ActiveRecord
 {
-    public $imgConf = array('m-'=>'resize 800x600','l-'=>'cut 300x250');
+    public $imgConf = array('s-'=>'cut 300x250','m-'=>'resize 800x600');
 	/**
 	 * @return string the associated database table name
 	 */
@@ -98,7 +98,7 @@ class ShopBrandsBase extends ActiveRecord
             'discount'=> array('input c2'),
             'display'=> array('checkbox c2'),
             'text'=> array('elrte c12',300),
-            'img'=> array('img c6',$this->imgConf),
+            'img'=> array('img c4',$this->imgConf),
             'seo'=> array('checkbox c3'),
             'url'=> array('input c4'),
             'title'=> array('input c5'),

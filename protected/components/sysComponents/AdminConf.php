@@ -161,4 +161,12 @@ class AdminConf {
         }
         return $array;
     }
+
+    function getImgSizeName($prefix='')
+    {
+        $array = array('xs-'=>'наименьшая','s-'=>'маленькая','m-'=>'средняя','l-'=>'крупная','xl-'=>'большая','xxl-'=>'наибольшая');
+        if ($prefix=='') return $array;
+        elseif (array_key_exists($prefix,$array)) return $array[$prefix];
+        else return false;
+    }
 } 

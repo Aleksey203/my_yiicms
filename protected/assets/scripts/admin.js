@@ -102,6 +102,27 @@ $(document).ready(function(){
 		return false;
 	});
 
+    //УДАЛЕНИЕ id
+    $(".files.file .delete").live('click',function(){
+        var div = $(this).parents('.data'),
+            url = div.closest('.form').data('url'),
+            id = div.closest('.form').data('id');
+        $.get("/admin.php/" + url + "/deleteImg", {'id':id},
+            function (data) {
+                if (data) alert(data);
+                else {
+                    div.find('.desc').remove();
+                    div.find('.img').addClass('no_img');
+                    div.find('.img img').attr('src','/css/no_img.png');
+                }
+            }
+        );
+        return false;
+    });
+
+    $(".files.file .data div.img.no_img").live('click',function(){
+        $(this).parents('.data').find('input.img').trigger('click');
+    });
     //SEO-оптимизация
     $("#seo").live('click',function(){
         $('.seo').toggle();

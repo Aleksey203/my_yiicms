@@ -100,6 +100,22 @@ class BackEndController extends Controller {
         else throw new CHttpException(400,'Неверный запрос. Ссылка, по которой вы пришли, неверна или устарела.');
 
     }
+    public function actionDeleteImg($id)
+    {
+        if(Yii::app()->request->isAjaxRequest)
+        {
+            $model = $this->loadModel($id);
+            $path = ROOT_DIR.'files/'.$this->modelName.'/'.$id;
+            if (is_dir($path))
+                if (ActiveRecord::delete_all($path)) {
+                    $model->img = '';
+                    $model->save();
+                }
+            //$this->setFlash('mod-msg', 'Элемент удален');
+        }
+        else throw new CHttpException(400,'Неверный запрос. Ссылка, по которой вы пришли, неверна или устарела.');
+
+    }
 
     public function actions() {
         return array (
