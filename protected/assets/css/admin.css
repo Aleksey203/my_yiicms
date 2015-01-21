@@ -263,6 +263,8 @@ select {
 .files .add_file>span {padding:2px; margin:0; height:16px; cursor:pointer;}
 .files .add_file input {position:absolute; right:-10px; top:-10px; font-size:100px; opacity:0;}
 
+.flash-success{display: inline-block; color: #419f2d; font: 17px/20px Arial; position: relative; top: 1px; margin-right: 5px;}
+
 .grid-view{ text-align: left;}
 
 .grid-view table.items {border-collapse: separate; border-color: #cdcdcd;}
@@ -402,3 +404,5 @@ input.error{border: 1px solid red!important;}
 #seo{display: block; float: left;  }
 #seo:hover{color: #2c7fa3;}
 #seo span{display: inline-block; border-bottom: 1px dashed #309bbf; font-weight: bold;}
+
+.ui-state-default:active{background: #fff;}

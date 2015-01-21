@@ -70,6 +70,15 @@ class BackEndController extends Controller {
                 $model->save();
                 if (@$_POST['redirect']=='true')
                     $this->redirect(array(Yii::app()->controller->id));
+                else {
+                    Yii::app()->clientScript->registerScript(
+                        'myHideEffect',
+                        '$(".flash-success").animate({opacity: 1.0}, 5000).fadeOut("slow");',
+                        CClientScript::POS_READY
+                    );
+
+                    Yii::app()->user->setFlash('success',"Изменения успешно сохранены!");
+                }
             }
         }
 

@@ -141,6 +141,14 @@ $(document).ready(function(){
         $('#post-form').submit();
         return false;
     });
+
+    $(".ui-state-default").hover(function(){
+        $(this).addClass('ui-state-hover');
+    },
+        function(){
+            $(this).removeClass('ui-state-hover');
+        });
+
 	/*  выделение + снять выделени + перемещение ********************************
 	tr .level.normal - обычный список
 	tr.select .level.select - выделный ряд
@@ -355,34 +363,7 @@ $(function() {
     });
 
 });
-$(function() {
 
-    $('.button.back').button({
-        icons: {
-            primary: "ui-icon-arrowthick-1-w"
-        }
-    });
-
-});
-$(function() {
-
-    $('.button.save').button({
-        icons: {
-            primary: "ui-icon-circle-triangle-e"
-        }
-    });
-
-});
-
-$(function() {
-
-    $('.button.save_continue').button({
-        icons: {
-            primary: "ui-icon-check"
-        }
-    });
-
-});
 
 $(function() {
 
