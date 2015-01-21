@@ -131,6 +131,13 @@ $(document).ready(function(){
 
     //AJAX-submit
     $(".buttons .button.save").live('click',function(){
+        $('#redirect').val('true');
+        $('#post-form').submit();
+        return false;
+    });
+    //AJAX-submit
+    $(".buttons .button.save_continue").live('click',function(){
+        $('#redirect').val('false');
         $('#post-form').submit();
         return false;
     });
@@ -361,7 +368,17 @@ $(function() {
 
     $('.button.save').button({
         icons: {
-            primary: "ui-icon-circle-check"
+            primary: "ui-icon-circle-triangle-e"
+        }
+    });
+
+});
+
+$(function() {
+
+    $('.button.save_continue').button({
+        icons: {
+            primary: "ui-icon-check"
         }
     });
 

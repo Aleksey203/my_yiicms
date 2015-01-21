@@ -16,6 +16,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
+	<?php echo CHtml::hiddenField('redirect','true')?>
 	<?php echo $form->errorSummary($model); ?>
     <?php $fields = $model->getFields();
     foreach ($fields as $field => $params) {

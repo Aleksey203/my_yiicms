@@ -68,7 +68,8 @@ class BackEndController extends Controller {
             if ($model->validate())
             {
                 $model->save();
-                $this->redirect(array(Yii::app()->controller->id));
+                if (@$_POST['redirect']=='true')
+                    $this->redirect(array(Yii::app()->controller->id));
             }
         }
 
