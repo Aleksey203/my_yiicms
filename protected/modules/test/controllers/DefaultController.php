@@ -2,7 +2,7 @@
 
 class DefaultController extends BackEndController
 {
-    public $modelName = 'ShopBrands';
+    public $modelName = 'ShopProducers';
     public $title = '';
 	public function actionIndex()
 	{

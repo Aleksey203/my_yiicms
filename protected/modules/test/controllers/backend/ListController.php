@@ -2,7 +2,7 @@
 
 class ListController extends BackEndController
 {
-    public $modelName = 'ShopBrands';
+    public $modelName = 'ShopProducers';
     public $title = '';
 
 }

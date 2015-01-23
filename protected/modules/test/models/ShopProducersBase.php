@@ -21,7 +21,7 @@
  * @property integer $display
  * @property integer $discount
  */
-class ShopBrandsBase extends ActiveRecord
+class ShopProducersBase extends ActiveRecord
 {
     public $imgConf = array('s-'=>'cut 300x250','m-'=>'resize 800x600');
 	/**
@@ -29,7 +29,7 @@ class ShopBrandsBase extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'shop_brands';
+		return 'shop_producers';
 	}
 
 	/**
@@ -92,7 +92,7 @@ class ShopBrandsBase extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ShopBrands the static model class
+	 * @return ShopProducers the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
