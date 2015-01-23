@@ -35,6 +35,14 @@ class BackEndController extends Controller {
         $action = Yii::app()->controller->action->id;
         if ($url!=$module.'/'.$controller.'/'.$action) $this->redirect(array($controller));
         $model = new $this->modelName('search');
+        if (!isset($_GET[$this->modelName.'_sort'])) {
+            if (isset($model->order)) $this->redirect(array($controller,$this->modelName.'_sort'=>$model->order));
+                else {
+                    $columns = $model->getFieldsArray();
+                    $sort = (isset($columns['date'])) ? 'date.desc' : 'id';
+                    $this->redirect(array($controller,$this->modelName.'_sort'=>$sort));
+                }
+        }
         $model->unsetAttributes();
         if (!empty($_GET[$this->modelName]))
             $model->attributes = $_GET[$this->modelName];
@@ -48,7 +56,7 @@ class BackEndController extends Controller {
 
     public function actionUpdate($new = false)
     {
-        $modelName =Yii::app()->controller->modelName;
+        $modelName = $this->modelName;
         if ($new === true) {
             $model = new $modelName;
             //$model->unsetAttributes();
@@ -70,21 +78,13 @@ class BackEndController extends Controller {
                 $model->save();
                 if (@$_POST['redirect']=='true')
                     $this->redirect(array(Yii::app()->controller->id));
-                else {
-                    Yii::app()->clientScript->registerScript(
-                        'myHideEffect',
-                        '$(".flash-success").animate({opacity: 1.0}, 5000).fadeOut("slow");',
-                        CClientScript::POS_READY
-                    );
-
+                else
                     Yii::app()->user->setFlash('success',"Изменения успешно сохранены!");
-                }
             }
         }
 
         $this->render('update', array(
             'model'=>$model,
-            //'form2'=>$form2,
         ));
     }
 
@@ -102,8 +102,6 @@ class BackEndController extends Controller {
         if(Yii::app()->request->isAjaxRequest)
         {
             $model = $this->loadModel($id);
-/*            $path = ROOT_DIR.'files/'.$this->modelName.'/'.$id;
-            if (is_dir($path)) $this->delete_all($path);*/
             $model->delete();
             //$this->setFlash('mod-msg', 'Элемент удален');
         }

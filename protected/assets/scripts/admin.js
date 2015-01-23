@@ -147,7 +147,9 @@ $(document).ready(function(){
     },
         function(){
             $(this).removeClass('ui-state-hover');
-        });
+    });
+
+    $(".flash-success").animate({opacity: 1.0}, 5000).fadeOut("slow");
 
 	/*  выделение + снять выделени + перемещение ********************************
 	tr .level.normal - обычный список

@@ -8,25 +8,23 @@ class ActiveRecord extends CActiveRecord {
     public $imgRootPath;
     public $imgConf = array();
 
-    public function getColumns($columns=array())
+    public function getColumns()
     {
-        if(!isset($columns) OR count($columns)<2)
-        $columns = array(
-            'id','name','display'
-        );
+        $columns = $this->getColumnsArray();
+        if(!isset($columns) OR count($columns)<2) $columns = array( 'id','name','display' );
         $module = Yii::app()->controller->module->id;
         $controller = Yii::app()->controller->id;
         array_unshift($columns,
             array(
-                'class' => 'CButtonColumn',
-                'header'=>CHtml::link(' ',Yii::app()->createUrl($module.'/'.$controller.'/create'),array('class'=>'create','title'=>'Добавить новую запись')),
-                'template'=>'{edit}',
-                'buttons' => array(
-                    'edit' => array(
-                        'url' => 'Yii::app()->createUrl("'.$module.'/'.$controller.'/update?id=$data->id")',
-                        'imageUrl'=>'/css/pencil.png',
-                        'label'=>'Редактировать запись',
-                    ),
+                'class'     => 'CButtonColumn',
+                'header'    =>CHtml::link(' ',Yii::app()->createUrl($module.'/'.$controller.'/create'),array('class'=>'create','title'=>'Добавить новую запись')),
+                'template'  =>'{edit}',
+                'buttons'   => array(
+                    'edit'  => array(
+                                    'url' => 'Yii::app()->createUrl("'.$module.'/'.$controller.'/update?id=$data->id")',
+                                    'imageUrl'=>'/css/pencil.png',
+                                    'label'=>'Редактировать запись',
+                                ),
                 ),
             )
         );
@@ -37,14 +35,12 @@ class ActiveRecord extends CActiveRecord {
             elseif ($column=='display') {
                 unset($columns[$k]);
                 array_push($columns, array(
-                    //'class' => 'CButtonColumn',
-                    //'template'=>'{display}{nodisplay}',
-                    'name' => 'display',
-                    'type' => 'html',
-                    'header' => '',
+                    'name'              => 'display',
+                    'type'              => 'html',
+                    'header'            => '',
                     'filterHtmlOptions' => array('class' => 'filter_display'),
-                    'htmlOptions'=> array('class' => 'display'),
-                    'filter'=>array(1=> 'Да', 0=> 'Нет'),
+                    'htmlOptions'       => array('class' => 'display'),
+                    'filter'            =>array(1=> 'Да', 0=> 'Нет'),
                     'value'=>function ($data,$row) {
                             if ($data->display==1)
                                 return '<a href="'.CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>0)).'" title="Выключить" class="active"></a>';
@@ -52,24 +48,6 @@ class ActiveRecord extends CActiveRecord {
                                 return '<a href="'.CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>1)).'" title="Включить" class="non-active"></a>';
                             else return '';
                         }
-
-                    /*'buttons' => array(
-                        'display' => array(
-                            //'url' => 'Yii::app()->createUrl("/".$module."/display/$data->id")',
-                            'url' => 'CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>0))',
-                            'imageUrl'=>'/css/display.png',
-                            'label'=>'Показывать',
-                            'options'=>array('class'=>'active'),
-                            'visible'=>'$data->display==1',
-                        ),
-                        'nodisplay' => array(
-                            'url' => 'CHtml::normalizeUrl(array("ajax","id"=>$data->id,"name"=>"display","value"=>1))',
-                            'imageUrl'=>'/css/nodisplay.png',
-                            'label'=>'Показывать',
-                            'options'=>array('class'=>'non-active'),
-                            'visible'=>'$data->display==0',
-                        ),
-                    ),*/
                 ));
             }
             elseif (!is_array($column) AND strpos($column,'__')!==false) {
@@ -77,12 +55,12 @@ class ActiveRecord extends CActiveRecord {
                 $type = array_pop(explode('__',$column));
                 if ($type == 'boolean') {
                     $columns[$k] =  array(
-                        'name' => $name,
+                        'name'              => $name,
                         'headerHtmlOptions' => array('class'=>'ta_center'),
-                        'htmlOptions' => array('class'=>'boolean'),
+                        'htmlOptions'       => array('class'=>'boolean'),
                         'filterHtmlOptions' => array('class' => 'filter_boolean'),
-                        'type' => 'html',
-                        'filter'=>array(1=> 'Да', 0=> 'Нет'),
+                        'type'              => 'html',
+                        'filter'            =>array(1=> 'Да', 0=> 'Нет'),
                         'value'=>function ($data,$row,$name) {
                                 $class = get_class($data);
                                 $name = $name->name;
@@ -96,10 +74,10 @@ class ActiveRecord extends CActiveRecord {
                 }
                 elseif ($type == 'image') {
                     $columns[$k] =  array(
-                        'name' => $name,
-                        'htmlOptions' => array('class'=>'img'),
-                        'type' => 'raw',
-                        'filter' => false,
+                        'name'          => $name,
+                        'htmlOptions'   => array('class'=>'img'),
+                        'type'          => 'raw',
+                        'filter'        => false,
                         'value'=>function ($data,$row,$name) {
                                 $class = get_class($data);
                                 $name = $name->name;
@@ -111,18 +89,18 @@ class ActiveRecord extends CActiveRecord {
                 }
                 elseif ($type == 'text') {
                     $columns[$k] =  array(
-                        'name' => $name,
-                        'type' => 'html',
-                        'value' => '$data->'.$name,
-                        'htmlOptions' => array('data-name'=>$column),
+                        'name'          => $name,
+                        'type'          => 'html',
+                        'value'         => '$data->'.$name,
+                        'htmlOptions'   => array('data-name'=>$column),
                     );
                 }
             }         elseif (!is_array($column) AND strpos($column,'.')>0===false) {
                 $columns[$k] =  array(
-                    'name' => $column,
-                    'type' => 'html',
-                    'value' => '$data->'.$column,
-                    'htmlOptions' => array('data-name'=>$column, 'class'=>($column=='id')?'id':'post'),
+                    'name'          => $column,
+                    'type'          => 'html',
+                    'value'         => '$data->'.$column,
+                    'htmlOptions'   => array('data-name'=>$column, 'class'=>($column=='id')?'id':'post'),
                 );
                 if ($column=='id') $columns[$k]['filter']=false;
             }
@@ -130,48 +108,37 @@ class ActiveRecord extends CActiveRecord {
         if ($nodelete === false) {
             array_push($columns,
                 array(
-                    'name' => $name,
-                    'htmlOptions' => array('class'=>'button-column'),
-                    'header' => '',
-                    'type' => 'raw',
-                    'filter' => false,
-                    'value'=>function ($data,$row) {
-                            $title = 'Удалить "';
-                            $title .= (isset($data->name)) ? $data->name : 'запись '.$data->id;
-                            $title .= '"';
-                            return CHtml::link('<img src="/css/del.png"/>','#',array('class'=>'delete','title'=>$title));
-                        }
-                )/*,
-                array(
-                    'class' => 'CButtonColumn',
-                    'template'=>'{delete}',
-                    'deleteConfirmation'=>"js:'Запись с ID '+$(this).parent().parent().children(':first-child').text()+' будет удалена! Вы уверены?'",
-                    'buttons' => array(
-                        'delete' => array(
-                            'url' => 'Yii::app()->createUrl("/delete/$data->id")',
-                            'imageUrl'=>'/css/del.png',
-                            'label'=>'Удалить запись',
-                        ),
-                    ),
-                )*/
+                    'name'          => $name,
+                    'htmlOptions'   => array('class'=>'button-column'),
+                    'header'        => '',
+                    'type'          => 'raw',
+                    'filter'        => false,
+                    'value'         =>function ($data,$row) {
+                                        $title = 'Удалить "';
+                                        $title .= (isset($data->name)) ? $data->name : 'запись '.$data->id;
+                                        $title .= '"';
+                                        return CHtml::link('<img src="/css/del.png"/>','#',array('class'=>'delete','title'=>$title));
+                                    }
+                )
             );
         }
         return $columns;
     }
 
-    public function getFields($fields=array())
+    public function getFields()
     {
         $func = array(
-            'input' => 'textField',
-            'textarea' => 'textArea',
-            'elrte' => 'textArea',
-            'select' => 'dropDownList',
-            'checkbox' => 'checkBox',
-            'checkboxlist' => 'checkBoxList',
-            'datetime' => 'dateTimeField',
-            'date' => 'dateField',
-            'img' => 'fileField',
+            'input'         => 'textField',
+            'textarea'      => 'textArea',
+            'elrte'         => 'textArea',
+            'select'        => 'dropDownList',
+            'checkbox'      => 'checkBox',
+            'checkboxlist'  => 'checkBoxList',
+            'datetime'      => 'dateTimeField',
+            'date'          => 'dateField',
+            'img'           => 'fileField',
         );
+        $fields = $this->getFieldsArray();
         if(!isset($fields) OR count($fields)<2)
             $fields = array(
                 'name'=> array('input c1'),
@@ -193,7 +160,7 @@ class ActiveRecord extends CActiveRecord {
         return array(
             'active'              => array('condition'=>$alias.'.display=1'),
             'orderByName'         => array('order'=>$alias.'.name ASC' ),
-            'orderByEmail'         => array('order'=>$alias.'.email ASC' ),
+            'orderByEmail'        => array('order'=>$alias.'.email ASC' ),
         );
     }
 
@@ -268,5 +235,21 @@ class ActiveRecord extends CActiveRecord {
 
     public function deleteImg($i){
         H::delete_all($this->imgRootPath,$i);
+    }
+
+    public function search()
+    {
+        $criteria=new CDbCriteria;
+        $columns = $this->getColumnsArray();
+        unset($columns[0]);
+        foreach ($columns as $v) {
+            if (is_array($v)) $column = $v['name'];
+            else $column = array_shift(explode('__',$v));
+            $criteria->compare($column,$this->$column,true);
+        }
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+            'pagination'=>array('pageSize'=>(isset($this->pageSize))?$this->pageSize:25),
+        ));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../components/sysComponents/AdminConf.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../helpers/H.php');
 $models = H::getAllFrontEndModels();
 
 return CMap::mergeArray(

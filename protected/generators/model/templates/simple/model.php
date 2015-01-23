@@ -52,7 +52,7 @@
  */
 class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 {
-    public $columns;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -103,6 +103,14 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 <?php endforeach; ?>
 		);
 	}
+    public function getFieldsArray()
+    {
+    return array(
+<?php foreach($fields as $name=>$array): ?>
+    <?php echo "'$name' => array('$array[0]'),\n"; ?>
+<?php endforeach; ?>
+    );
+    }
 
     public function getColumns()
     {

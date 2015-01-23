@@ -17,7 +17,6 @@
  */
 class News extends ActiveRecord
 {
-    public $columns;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -75,9 +74,25 @@ class News extends ActiveRecord
 		);
 	}
 
-    public function getColumns()
+    public function getFieldsArray()
     {
-        $columns = array(
+        return array(
+            'name'=> array('input c6'),
+            'date'=> array('input c2'),
+            'user'=> array('select c2',CHtml::listData(Users::model()->orderByEmail()->findAll(),'id', 'email')),
+            'display'=> array('checkbox c2'),
+            'text'=> array('elrte c12',350),
+            'seo'=> array('checkbox c2'),
+            'url'=> array('input c4'),
+            'title'=> array('input c6'),
+            'keywords'=> array('input c12'),
+            'description'=> array('input c12'),
+        );
+    }
+
+    public function getColumnsArray()
+    {
+        return array(
             'id','name',
             array(
                 'name'   => 'user',
@@ -87,59 +102,7 @@ class News extends ActiveRecord
             ),
             'title','display','url','date'
         );
-        return parent::getColumns($columns);
     }
-
-    public function getFields()
-    {
-        $fields = array(
-            'name'=> array('input c6'),
-            'date'=> array('input c2'),
-            'user'=> array('select c2',array(1=>'admin',2=>'test')),
-            'display'=> array('checkbox c2'),
-            'text'=> array('elrte c12',350),
-            'seo'=> array('checkbox c2'),
-            'url'=> array('input c4'),
-            'title'=> array('input c6'),
-            'keywords'=> array('input c12'),
-            'description'=> array('input c12'),
-        );
-        return parent::getFields($fields);
-    }
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('date',$this->date,true);
-		$criteria->compare('user',$this->user,true);
-		$criteria->compare('display',$this->display);
-		//$criteria->compare('name',$this->name,true);
-		$criteria->compare('text',$this->text,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('keywords',$this->keywords,true);
-		$criteria->compare('description',$this->description,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
 
 	/**
 	 * Returns the static model of the specified AR class.

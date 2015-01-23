@@ -104,6 +104,7 @@ class ModelCode extends CCodeModel
 				'tableName'=>$schema==='' ? $tableName : $schema.'.'.$tableName,
 				'modelClass'=>$className,
 				'columns'=>$table->columns,
+				'fields'=>$this->generateFields($table),
 				'labels'=>$this->generateLabels($table),
 				'rules'=>$this->generateRules($table),
 				'relations'=>isset($this->relations[$className]) ? $this->relations[$className] : array(),
@@ -212,6 +213,7 @@ class ModelCode extends CCodeModel
 	public function generateLabels($table)
 	{
         require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../../components/sysComponents/AdminConf.php');
+        require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../../helpers/H.php');
         $confLabels = H::getLabels();
 		$labels=array();
 		foreach($table->columns as $column)
@@ -273,6 +275,26 @@ class ModelCode extends CCodeModel
 			$rules[]="array('".implode(', ',$safe)."', 'safe')";
 
 		return $rules;
+	}
+	public function generateFields($table)
+	{
+        $fields=array();
+		foreach($table->columns as $column)
+		{
+			if($column->autoIncrement)
+				continue;
+            if ($column->dbType==='datetime' OR $column->dbType==='date') $fields[$column->name] = array('input c2');
+            elseif ($column->dbType==='tinyint(1)') $fields[$column->name] = array('checkbox');
+            elseif ($column->dbType==='text') $fields[$column->name] = array('elrte c12');
+            elseif ($column->name==='url') {$fields['seo'] = array('checkbox c2'); $fields[$column->name] = array('input c4'); }
+            elseif ($column->name==='title')  $fields[$column->name] = array('input c6');
+            elseif ($column->name==='keywords')  $fields[$column->name] = array('input c12');
+            elseif ($column->name==='description')  $fields[$column->name] = array('input c12');
+            elseif ($column->type==='string' AND $column->size>0) $fields[$column->name] = array('input c');
+            else $fields[$column->name] = array('input c');
+		}
+
+		return $fields;
 	}
 
 	public function getRelations($className)

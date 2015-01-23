@@ -6,41 +6,34 @@
  */
 class ShopBrands extends ShopBrandsBase
 {
-	public function getColumns()
-	{
-		$columns = array(
-        	'id','name','url','title','producer','country','rank','img__image','discount','display'		);
-		return parent::getColumns($columns);
-	}
+    public $order = 'id.desc';
 
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+    public function getFieldsArray()
+    {
+        return array(
+            'name'=> array('input c3'),
+            //'module'=> array('select c2',AdminConf::getKeysBaseModules()),
+            'producer'=> array('input c2'),
+            'country'=> array('input c2'),
+            'rank'=> array('input c1'),
+            'discount'=> array('input c2'),
+            'display'=> array('checkbox c2'),
+            'text'=> array('elrte c12',300),
+            'img'=> array('img c4',$this->imgConf),
+            'seo'=> array('checkbox c3'),
+            'url'=> array('input c4'),
+            'title'=> array('input c5'),
+            'keywords'=> array('input c12'),
+            'description'=> array('input c12'),
+        );
+    }
 
-		$criteria=new CDbCriteria;
 
-		//$criteria->compare('id',$this->id);
-		//$criteria->compare('guid',$this->guid,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('title',$this->title,true);
-		//$criteria->compare('keywords',$this->keywords,true);
-		//$criteria->compare('description',$this->description,true);
-		//$criteria->compare('text',$this->text,true);
-		$criteria->compare('producer',$this->producer,true);
-		$criteria->compare('country',$this->country,true);
-		$criteria->compare('rank',$this->rank);
-		//$criteria->compare('rank2',$this->rank2);
-		//$criteria->compare('img',$this->img,true);
-		//$criteria->compare('img2',$this->img2,true);
-		$criteria->compare('display',$this->display);
-		$criteria->compare('discount',$this->discount);
-		$criteria->order = 'id DESC';
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'pagination'=>array('pageSize'=>25),
-		));
-	}
+    public function getColumnsArray()
+    {
+        return array(
+            'id','name','url','title','producer','country','rank','img__image','discount','display'
+        );
+    }
 
 }

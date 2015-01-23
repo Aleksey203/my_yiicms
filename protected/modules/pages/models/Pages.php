@@ -22,15 +22,6 @@
  */
 class Pages extends ActiveRecord
 {
-    public $columns;
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'pages';
-	}
-
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -86,16 +77,16 @@ class Pages extends ActiveRecord
 		);
 	}
 
-    public function getColumns()
+    public function getColumnsArray()
     {
-        $columns = array(
-        'id','name','module__text','url','title','menu__boolean','display');
-        return parent::getColumns($columns);
+        return array(
+            'id','name','module__text','url','title','menu__boolean','display'
+        );
     }
 
-    public function getFields()
+    public function getFieldsArray()
     {
-        $fields = array(
+        return array(
             'name'=> array('input c6'),
             'module'=> array('select c2',H::getKeysBaseModules()),
             'menu'=> array('checkbox'),
@@ -107,49 +98,17 @@ class Pages extends ActiveRecord
             'keywords'=> array('input c12'),
             'description'=> array('input c12'),
         );
-        return parent::getFields($fields);
     }
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName()
+    {
+        return 'pages';
+    }
 
-		//$criteria->compare('id',$this->id);
-		//$criteria->compare('language',$this->language);
-		//$criteria->compare('parent',$this->parent);
-		//$criteria->compare('left_key',$this->left_key,true);
-		//$criteria->compare('right_key',$this->right_key,true);
-		//$criteria->compare('level',$this->level);
-		$criteria->compare('display',$this->display);
-		$criteria->compare('menu',$this->menu);
-		$criteria->compare('module',$this->module,true);
-		$criteria->compare('name',$this->name,true);
-		//$criteria->compare('text',$this->text,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('title',$this->title,true);
-		//$criteria->compare('keywords',$this->keywords,true);
-		//$criteria->compare('description',$this->description,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'pagination'=>array('pageSize'=>25),
-		));
-	}
-
-	/**
+    /**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
