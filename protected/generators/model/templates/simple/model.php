@@ -90,7 +90,8 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
     public function getFieldsArray()
     {
         return array(
-<?php foreach($fields as $name=>$array): ?>
+<?php foreach($fields as $name=>$array):
+            if ($name=='id') continue; ?>
     <?php echo "        '$name' ".H::nbsp($name)."=> array('$array[0]'),\n"; ?>
 <?php endforeach; ?>
         );

@@ -281,8 +281,8 @@ class ModelCode extends CCodeModel
         $fields=array();
 		foreach($table->columns as $column)
 		{
-			if($column->autoIncrement)
-				continue;
+			//if($column->autoIncrement)
+				//continue;
             if ($column->dbType==='datetime' OR $column->dbType==='date') $fields[$column->name] = array('input c2');
             elseif (strpos($column->dbType,'tinyint(1)')>-1) $fields[$column->name] = array('checkbox');
             elseif ($column->dbType==='text') $fields[$column->name] = array('elrte c12');
