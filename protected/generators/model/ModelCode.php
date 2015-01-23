@@ -284,7 +284,7 @@ class ModelCode extends CCodeModel
 			if($column->autoIncrement)
 				continue;
             if ($column->dbType==='datetime' OR $column->dbType==='date') $fields[$column->name] = array('input c2');
-            elseif ($column->dbType==='tinyint(1)') $fields[$column->name] = array('checkbox');
+            elseif (strpos($column->dbType,'tinyint(1)')>-1) $fields[$column->name] = array('checkbox');
             elseif ($column->dbType==='text') $fields[$column->name] = array('elrte c12');
             elseif ($column->name==='url') {$fields['seo'] = array('checkbox c2'); $fields[$column->name] = array('input c4'); }
             elseif ($column->name==='title')  $fields[$column->name] = array('input c6');

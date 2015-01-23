@@ -80,7 +80,7 @@ class Pages extends ActiveRecord
     public function getColumnsArray()
     {
         return array(
-            'id','name','module__text','url','title','menu__boolean','display'
+            'id','name','module__text','url','title','menu__boolean','display',
         );
     }
 

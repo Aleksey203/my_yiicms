@@ -168,6 +168,15 @@ class H extends CComponent
         $fieldset = array_merge ($fieldset, AdminConf::getLabels());
         return $fieldset;
     }
+
+    public static function nbsp($name,$length=15)
+    {
+        $diff = $length-strlen($name);
+        if ($diff<0) $diff = 0;
+        $str = '                                                                   ';
+        $str = substr($str,0,$diff);
+        return $str;
+    }
 }
 
 

@@ -52,22 +52,11 @@
  */
 class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 {
-
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return '<?php echo $tableName; ?>';
-	}
-
 	/**
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 <?php foreach($rules as $rule): ?>
 			<?php echo $rule.",\n"; ?>
@@ -78,16 +67,11 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 		);
 	}
 
-	/**
-	 * @return array relational rules.
-	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 <?php foreach($relations as $name=>$relation): ?>
-			<?php echo "'$name' => $relation,\n"; ?>
+			<?php echo "'$name' ".H::nbsp($name)."=> $relation,\n"; ?>
 <?php endforeach; ?>
 		);
 	}
@@ -99,65 +83,27 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 	{
 		return array(
 <?php foreach($labels as $name=>$label): ?>
-			<?php echo "'$name' => '$label',\n"; ?>
+			<?php echo "'$name' ".H::nbsp($name)."=> '$label',\n"; ?>
 <?php endforeach; ?>
 		);
 	}
     public function getFieldsArray()
     {
-    return array(
+        return array(
 <?php foreach($fields as $name=>$array): ?>
-    <?php echo "'$name' => array('$array[0]'),\n"; ?>
+    <?php echo "        '$name' ".H::nbsp($name)."=> array('$array[0]'),\n"; ?>
 <?php endforeach; ?>
-    );
+        );
     }
 
-    public function getColumns()
+    public function getColumnsArray()
     {
-        $columns = array(
-        <?php $str = ''; foreach($labels as $name=>$label): ?>
-<?php $str .= ",'$name'"; ?>
-<?php endforeach; echo substr($str,1)?>
-);
-        return parent::getColumns($columns);
+        return array(
+<?php foreach($fields as $name=>$array): ?>
+    <?php echo "        '$name',\n"; ?>
+<?php endforeach; ?>
+        );
     }
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-<?php
-foreach($columns as $name=>$column)
-{
-	if($column->type==='string')
-	{
-		echo "\t\t\$criteria->compare('$name',\$this->$name,true);\n";
-	}
-	else
-	{
-		echo "\t\t\$criteria->compare('$name',\$this->$name);\n";
-	}
-}
-?>
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'pagination'=>array('pageSize'=>25),
-		));
-	}
 
 <?php if($connectionId!='db'):?>
 	/**
@@ -169,7 +115,15 @@ foreach($columns as $name=>$column)
 	}
 
 <?php endif?>
-	/**
+    /**
+    * @return string the associated database table name
+    */
+    public function tableName()
+    {
+        return '<?php echo $tableName; ?>';
+    }
+
+/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
