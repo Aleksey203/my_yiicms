@@ -101,4 +101,16 @@ class AdminConf extends CComponent {
         );
         return $fieldset;
     }
+
+    public static function getConfArray($key)
+    {
+        $conf['attrTypes'] = array(
+            '1' => 'число',
+            '2' => 'строка',
+            '3' => 'текст',
+            '4' => 'выпадающий список',
+            '5' => 'чекбокс',
+        );
+        return $conf[$key];
+    }
 }
