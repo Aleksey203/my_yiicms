@@ -27,7 +27,7 @@ class WebModule extends CWebModule {
             $this->controllerPath = $this->basePath.'/controllers/backend';
         }
         if(Yii::app()->params['cfgName']=='frontend'){
-            $this->controllerPath = $this->basePath.'/controllers/frontend';
+            $this->controllerPath = $this->basePath.'/controllers';
             //$this->viewPath = $this->basePath.'/views/frontend';
         }
     }

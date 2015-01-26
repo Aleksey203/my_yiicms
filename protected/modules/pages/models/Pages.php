@@ -53,29 +53,6 @@ class Pages extends ActiveRecord
 		);
 	}
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'language' => 'язык',
-			'parent' => 'родитель',
-			'left_key' => 'Left Key',
-			'right_key' => 'Right Key',
-			'level' => 'уровень',
-			'display' => 'показывать',
-			'menu' => 'меню',
-			'module' => 'модуль',
-			'name' => 'название',
-			'text' => 'текст',
-			'url' => 'Url',
-			'title' => 'Title',
-			'keywords' => 'Keywords',
-			'description' => 'Description',
-		);
-	}
 
     public function getColumnsArray()
     {

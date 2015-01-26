@@ -12,7 +12,6 @@ class ShopProducers extends ShopProducersBase
     {
         return array(
             'name'=> array('input c3'),
-            //'module'=> array('select c2',AdminConf::getKeysBaseModules()),
             'producer'=> array('input c2'),
             'country'=> array('input c2'),
             'rank'=> array('input c1'),

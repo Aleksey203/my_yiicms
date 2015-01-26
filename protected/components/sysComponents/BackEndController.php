@@ -33,14 +33,14 @@ class BackEndController extends Controller {
         $module = Yii::app()->controller->module->id;
         $controller = Yii::app()->controller->id;
         $action = Yii::app()->controller->action->id;
-        if ($url!=$module.'/'.$controller.'/'.$action) $this->redirect(array($controller));
+        if ($url!=$module.'/'.$controller.'/'.$action) $this->redirect(array($action));
         $model = new $this->modelName('search');
         if (!isset($_GET[$this->modelName.'_sort'])) {
-            if (isset($model->order)) $this->redirect(array($controller,$this->modelName.'_sort'=>$model->order));
+            if (isset($model->order)) $this->redirect(array($action,$this->modelName.'_sort'=>$model->order));
                 else {
                     $columns = $model->getFieldsArray();
                     $sort = (isset($columns['date'])) ? 'date.desc' : 'id';
-                    $this->redirect(array($controller,$this->modelName.'_sort'=>$sort));
+                    $this->redirect(array($action,$this->modelName.'_sort'=>$sort));
                 }
         }
         $model->unsetAttributes();
@@ -76,8 +76,9 @@ class BackEndController extends Controller {
             if ($model->validate())
             {
                 $model->save();
+                $action = Yii::app()->controller->action->id;
                 if (@$_POST['redirect']=='true')
-                    $this->redirect(array(Yii::app()->controller->id));
+                    $this->redirect(array($this->defaultAction));
                 else
                     Yii::app()->user->setFlash('success',"Изменения успешно сохранены!");
             }

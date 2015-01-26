@@ -11,13 +11,13 @@ class AdminConf extends CComponent {
             'НОВОСТИ'		=>	'news',
             'КАТАЛОГ'		=>	 array('shop',array( //shop - это название модуля, 'товары' - это вкладка подменю, 'products' - файл для вкладки подменю
                 'товары'				=>	'products',
-                'разделы'				=>	'categories',
                 'производители'			=>	'brands',
+                'разделы'				=>	'categories',
                 'параметры'				=>	'parameters',
                 'экспорт в файл'		=>	'export',
                 'импорт из файла'		=>	'import',
             )),
-            'МАГАЗИН'		=>	array('test',array(
+            'МАГАЗИН'		=>	array('orders',array(
                 'статистика заказов'	=>	'list',
                 'статусы заказов'		=>	'types',
                 'доставка'				=>	'deliveries',

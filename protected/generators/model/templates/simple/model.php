@@ -76,17 +76,6 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 		);
 	}
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-<?php foreach($labels as $name=>$label): ?>
-			<?php echo "'$name' ".H::nbsp($name)."=> '$label',\n"; ?>
-<?php endforeach; ?>
-		);
-	}
     public function getFieldsArray()
     {
         return array(
@@ -104,6 +93,14 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
     <?php echo "        '$name',\n"; ?>
 <?php endforeach; ?>
         );
+    }
+
+    /**
+    * @return array customized attribute labels (name=>label)
+    */
+    public function attributeLabelsArray()
+    {
+        return array();
     }
 
 <?php if($connectionId!='db'):?>

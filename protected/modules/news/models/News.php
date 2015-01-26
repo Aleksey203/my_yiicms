@@ -58,19 +58,10 @@ class News extends ActiveRecord
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
-	public function attributeLabels()
+	public function attributeLabelsArray()
 	{
 		return array(
-			'id' => 'ID',
-			'date' => 'дата',
 			'user' => 'автор новости',
-			'display' => 'показывать',
-			'name' => 'Название',
-			'text' => 'Текст',
-			'title' => 'Title',
-			'url' => 'Url',
-			'keywords' => 'Keywords',
-			'description' => 'Description',
 		);
 	}
 

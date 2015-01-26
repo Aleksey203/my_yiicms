@@ -1,6 +1,6 @@
 <?php
 
-class TestModule extends WebModule
+class OrdersModule extends WebModule
 {
 	public function init()
 	{

@@ -154,6 +154,17 @@ class ActiveRecord extends CActiveRecord {
         }
         return $fields;
     }
+
+    public function attributeLabelsArray()
+    {
+        return array();
+    }
+
+    public function attributeLabels()
+    {
+        return array_merge(AdminConf::getLabels(),$this->attributeLabelsArray());
+    }
+
     public function scopes()
     {
         $alias = $this->getTableAlias();
@@ -172,9 +183,11 @@ class ActiveRecord extends CActiveRecord {
 
             if(isset($_POST['seo'])) {
                 $this->url = H::trunslit($this->name);
+                $text = (isset($this->text)) ? $this->text : '';
+                $description = (isset($this->description)) ? $this->description : '';
                 if (isset($this->title)) $this->title = $this->name;
-                if (isset($this->description)) $this->description = H::description(@$this->text.' '.$this->name);
-                if (isset($this->keywords)) $this->keywords = H::keywords($this->name.' '.@$this->description.' '.@$this->text);
+                if (isset($this->description)) $this->description = H::description($text.' '.$this->name);
+                if (isset($this->keywords)) $this->keywords = H::keywords($this->name.' '.$description.' '.$text);
             }
             if(isset($this->date)) {
                 if($this->isNewRecord OR $this->date=='0000-00-00 00:00:00')
