@@ -79,8 +79,11 @@ class BackEndController extends Controller {
                 $action = Yii::app()->controller->action->id;
                 if (@$_POST['redirect']=='true')
                     $this->redirect(array($this->defaultAction));
-                else
+                elseif (@$_POST['redirect']=='false')
                     Yii::app()->user->setFlash('success',"Изменения успешно сохранены!");
+                else {
+                    $this->redirect(array(@$_POST['redirect'],'id' => $model->id));
+                }
             }
         }
 

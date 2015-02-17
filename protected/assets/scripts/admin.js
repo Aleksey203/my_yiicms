@@ -137,7 +137,6 @@ $(document).ready(function(){
     });
     //AJAX-submit
     $(".buttons .button.save_continue").live('click',function(){
-        $('#redirect').val('false');
         $('#post-form').submit();
         return false;
     });

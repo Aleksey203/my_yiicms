@@ -14,9 +14,11 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
-)); ?>
+));
+$redirect = ($this->action->id=='update') ? 'false' : 'update';
+?>
 
-	<?php echo CHtml::hiddenField('redirect','true')?>
+	<?php echo CHtml::hiddenField('redirect',$redirect)?>
 	<?php echo $form->errorSummary($model); ?>
     <?php $fields = $model->getFields();
     foreach ($fields as $field => $params) {
