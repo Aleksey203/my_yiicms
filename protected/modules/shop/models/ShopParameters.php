@@ -83,6 +83,13 @@ class ShopParameters extends ActiveRecord
         );
     }
 
+    public function beforeDelete()
+    {
+        parent::beforeDelete();
+        ShopParametersCategories::model()->deleteAllByAttributes(array('child'=>$this->id));
+        return true;
+    }
+
     /**
     * @return string the associated database table name
     */

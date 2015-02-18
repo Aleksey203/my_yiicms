@@ -87,6 +87,13 @@ class ShopCategories extends ActiveRecord
         $this->parameters_array=$value;
     }
 
+    public function beforeDelete()
+    {
+        parent::beforeDelete();
+        ShopParametersCategories::model()->deleteAllByAttributes(array('parent'=>$this->id));
+        return true;
+    }
+
     protected function afterSave()
     {
         $this->refreshParameters();

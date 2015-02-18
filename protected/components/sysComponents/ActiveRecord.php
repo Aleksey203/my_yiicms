@@ -181,7 +181,7 @@ class ActiveRecord extends CActiveRecord {
         if(parent::beforeValidate())
         {
 
-            if(isset($_POST['seo'])) {
+            if(isset($_POST['seo']) AND isset($this->name)) {
                 $this->url = H::trunslit($this->name);
                 $text = (isset($this->text)) ? $this->text : '';
                 $description = (isset($this->description)) ? $this->description : '';
