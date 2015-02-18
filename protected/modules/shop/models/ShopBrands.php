@@ -61,6 +61,17 @@ class ShopBrands extends ActiveRecord
         );
     }
 
+    public function beforeDelete()
+    {
+        parent::beforeDelete();
+        if (ShopProducts::model()->exists('brand=:brand', array(':brand'=>$this->id)))
+        {
+            echo 'Перед удалением необходимо удалить все товары данного производителя';
+            return false;
+        }
+        return true;
+    }
+
     /**
     * @return string the associated database table name
     */

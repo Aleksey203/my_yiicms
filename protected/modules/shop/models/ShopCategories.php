@@ -90,6 +90,11 @@ class ShopCategories extends ActiveRecord
     public function beforeDelete()
     {
         parent::beforeDelete();
+        if (ShopProducts::model()->exists('category=:category', array(':category'=>$this->id)))
+        {
+            echo 'Перед удалением необходимо удалить все товары данного раздела';
+            return false;
+        }
         ShopParametersCategories::model()->deleteAllByAttributes(array('parent'=>$this->id));
         return true;
     }
