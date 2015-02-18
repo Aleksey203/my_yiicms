@@ -61,11 +61,7 @@ class BackEndController extends Controller {
             $model = new $modelName;
             //$model->unsetAttributes();
         }
-        else
-            $model = $modelName::model($modelName)->with('parameters')->find(array(
-                'condition'=>'t.id=:id',
-                'params'=>array(':id'=>$_GET['id'])
-            ));
+        else $model = $modelName::model($modelName)->findByPk($_GET['id']);
 
         if (!$model)
             throw new CHttpException(404, 'Страница не найдена.');
