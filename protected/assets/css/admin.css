@@ -347,6 +347,11 @@ select {
 .update .input input{ border: 1px solid #b3b3b3; clear: both; color: #333; font: 12px/25px Arial;
     height: 25px; margin: 0; padding: 0 0 0 4px; width: 100%;}
 .update .row.checkbox{height: 52px;}
+.update .row.checkboxlist{}
+.update .row.checkboxlist>label{display: inline-block; font: 15px Arial;}
+.update .row.checkboxlist span{}
+.update .row.checkboxlist span input{display: inline-block;}
+.update .row.checkboxlist span label{display: inline-block; padding: 0;}
 .update .checkbox label { display: inline-block; margin: 20px 0 0; padding: 2px 19px 2px 0;}
 .update .checkbox input {float: left; margin: 2px 5px 0 0; padding: 0; width: 15px;}
 .update .checkbox div {float: left; margin: 20px 0 0; padding: 2px 0px 2px 0;}

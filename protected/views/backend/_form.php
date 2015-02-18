@@ -30,6 +30,11 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
         }
         elseif ($params[0]=='elrte') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
         elseif ($params[0]=='checkbox') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
+        elseif ($params[0]=='checkboxlist') {
+            $related = $model->getActiveRelation($field)->className;
+            $array[] = CHtml::listData($related::model()->findAll(),'id', 'name');
+            $array[1] .= 'Array';
+        }
         else $array[]['class']=$params[0];
         if ($field=='seo') echo '<div class="row c12 toggle">'.CHtml::link('<span>SEO-оптимизация</span>','#', array('id' => 'seo')).'</div>';
         $class = ($field=='url' OR $field=='title' OR $field=='keywords' OR $field=='description' OR $field=='seo')?'seo':'';

@@ -66,6 +66,9 @@ class AdminConf extends CComponent {
             'forum_topic'	=> 'темы',
             'id'			=> 'ID',
             'img'			=> 'фото',
+            'in_filter'     => 'в фильтре',
+            'in_product'    => 'в товаре',
+            'in_list'       => 'в списке',
             'keywords'		=> 'Keywords',
             'level'			=> 'уровень',
             'login'			=> 'логин',
@@ -79,6 +82,7 @@ class AdminConf extends CComponent {
             'news'			=> 'новости',
             'orders'		=> 'заказы',
             'page'			=> 'текстовые страницы',
+            'parameters'	=> 'параметры',
             'parent'		=> 'родитель',
             'password'		=> 'пароль',
             'price'			=> 'цена',
@@ -87,6 +91,7 @@ class AdminConf extends CComponent {
             'phone'			=> 'телефон',
             'question'		=> 'вопрос',
             'rank'			=> 'рейтинг',
+            'required'		=> 'обязательное поле',
             'sale'			=> 'распродажа',
             'seo'			=> 'сгенерировать seo-поля',
             'special'		=> 'спец-товар',
@@ -97,12 +102,12 @@ class AdminConf extends CComponent {
             'url'			=> 'Url',
             'user'			=> 'пользователь',
             'user_type'		=> 'статус',
-            'values'		=> 'занчения',
+            'values'		=> 'значения',
         );
         return $fieldset;
     }
 
-    public static function getConfArray($key)
+    public static function getConfArray($key,$value = false)
     {
         $conf['attrTypes'] = array(
             '1' => 'число',
@@ -111,6 +116,10 @@ class AdminConf extends CComponent {
             '4' => 'выпадающий список',
             '5' => 'чекбокс',
         );
-        return $conf[$key];
+        if ($value) {
+            return $conf[$key][$value];
+        } else {
+            return $conf[$key];
+        }
     }
 }

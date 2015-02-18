@@ -18,6 +18,7 @@
  */
 class ShopCategories extends ActiveRecord
 {
+    protected $parameters_array;
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -25,6 +26,7 @@ class ShopCategories extends ActiveRecord
 	{
 		return array(
 			array('name', 'required'),
+			array('parametersArray', 'safe'),
 			array('level, display', 'numerical', 'integerOnly'=>true),
 			array('parent, left_key, right_key', 'length', 'max'=>10),
 			array('name, title, url, keywords, description', 'length', 'max'=>255),
@@ -37,6 +39,8 @@ class ShopCategories extends ActiveRecord
 	public function relations()
 	{
 		return array(
+            'parameters'=>array(self::MANY_MANY, 'ShopParameters',
+                'shop_parameters__categories(parent, child)'),
 		);
 	}
 
@@ -49,6 +53,7 @@ class ShopCategories extends ActiveRecord
             //'level'           => array('input c'),
             'name'            => array('input c'),
             'display'         => array('checkbox'),
+            'parameters'      => array('checkboxlist c12'),
             'seo'             => array('checkbox c2'),
             'title'           => array('input c6'),
             'url'             => array('input c4'),
@@ -68,6 +73,45 @@ class ShopCategories extends ActiveRecord
             'keywords',
             'description',
         );
+    }
+
+    public function getParametersArray()
+    {
+        if ($this->parameters_array===null)
+            $this->parameters_array=CHtml::listData($this->parameters, 'id', 'id');
+        return $this->parameters_array;
+    }
+
+    public function setParametersArray($value)
+    {
+        $this->parameters_array=$value;
+    }
+
+    protected function afterSave()
+    {
+        $this->refreshParameters();
+        parent::afterSave();
+    }
+
+    protected function refreshParameters()
+    {
+        $parameters = $this->parametersArray;
+
+        ShopParametersCategories::model()->deleteAllByAttributes(array('parent'=>$this->id));
+
+        if (is_array($parameters))
+        {
+            foreach ($parameters as $id)
+            {
+                if (ShopCategories::model()->exists('id=:id', array(':id'=>$this->id)))
+                {
+                    $paramCat = new ShopParametersCategories();
+                    $paramCat->parent = $this->id;
+                    $paramCat->child = $id;
+                    $paramCat->save();
+                }
+            }
+        }
     }
 
     /**
