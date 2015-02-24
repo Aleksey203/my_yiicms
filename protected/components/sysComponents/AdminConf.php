@@ -116,6 +116,13 @@ class AdminConf extends CComponent {
             '4' => 'выпадающий список',
             '5' => 'чекбокс',
         );
+        $conf['attrTypesFunc'] = array(
+            '1' => 'textField',
+            '2' => 'textField',
+            '3' => 'textArea',
+            '4' => 'dropDownList',
+            '5' => 'checkBox',
+        );
         if ($value) {
             return $conf[$key][$value];
         } else {

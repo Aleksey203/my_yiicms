@@ -24,6 +24,7 @@
 class ShopProducts extends ActiveRecord
 {
     public $imgConf = array('s-'=>'cut 400x270','m-'=>'resize 800x600');
+    protected $parameters_many;
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -34,7 +35,7 @@ class ShopProducts extends ActiveRecord
 			array('special, display', 'numerical', 'integerOnly'=>true),
 			array('article, name, title, url, keywords, description, img', 'length', 'max'=>255),
 			array('category, brand, price, price2', 'length', 'max'=>10),
-			array('date, text', 'safe'),
+			array('date, text, parametersMany', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, article, special, category, brand, date, display, price, price2, name, text, title, url, keywords, description, img', 'safe', 'on'=>'search'),
@@ -46,6 +47,7 @@ class ShopProducts extends ActiveRecord
         return array(
             'brands' => array(self::BELONGS_TO, 'ShopBrands', 'brand'),
             'categories' => array(self::BELONGS_TO, 'ShopCategories', 'category'),
+            'parameters' => array(self::HAS_MANY, 'ShopProductValues', 'product'),
         );
 	}
 
@@ -63,6 +65,7 @@ class ShopProducts extends ActiveRecord
             'price'           => array('input c'),
             'price2'          => array('input c'),
             'text'            => array('elrte c12'),
+            'parameters'      => array('many c4'),
             'img'             => array('img c4',$this->imgConf),
             'seo'             => array('checkbox c2'),
             'url'             => array('input c4'),
@@ -99,6 +102,24 @@ class ShopProducts extends ActiveRecord
             'special__boolean',
             'display',
         );
+    }
+
+    public function getParametersMany()
+    {
+        if ($this->parameters_many===null)
+            //$this->parameters_many = CHtml::listData(ShopProductValues::model()->findAllByAttributes(array('product'=>$this->id)),'parameter', 'value');
+            $query = "
+                SELECT sp.id, sp.name
+                FROM shop_parameters sp
+                LEFT JOIN shop_parameters__categories spc ON spc.parent=:category
+                "; //echo $query;
+        $this->parameters_many = CHtml::listData(ShopParameters::model()->findAllBySql($query,array(':category'=>$this->category)),'id', 'name');
+        return $this->parameters_many;
+    }
+
+    public function setParametersMany($value)
+    {
+        $this->parameters_many=$value;
     }
 
     /**

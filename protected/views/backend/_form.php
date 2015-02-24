@@ -29,11 +29,17 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
             $array[] = array('class' => $params[0],'prompt'=>' - - - ','options'=>$selected);
         }
         elseif ($params[0]=='elrte') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
-        elseif ($params[0]=='checkbox') $array[] = array('class' => $params[0],'style'=>'height:'.$params[3].'px');
+        elseif ($params[0]=='checkbox') $array[] = array('class' => $params[0]);
         elseif ($params[0]=='checkboxlist') {
             $related = $model->getActiveRelation($field)->className;
             $array[] = CHtml::listData($related::model()->findAll(),'id', 'name');
             $array[1] .= 'Array';
+        }
+        elseif ($params[0]=='many') {
+            $fk = $model->getActiveRelation($field)->foreignKey;
+            $related = $model->getActiveRelation($field)->className;
+            $array[] = CHtml::listData($related::model()->findAllByAttributes(array($fk=>$model->id)),'parameter', 'value');
+            $many = $model->$field.'Many';
         }
         else $array[]['class']=$params[0];
         if ($field=='seo') echo '<div class="row c12 toggle">'.CHtml::link('<span>SEO-оптимизация</span>','#', array('id' => 'seo')).'</div>';
@@ -70,15 +76,25 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
                         <?php } ?>
                     </div>
                     <?php } ?>
-                    <?php echo $form->$params[2]($array[0],$array[1],$array[2],@$array[3]);?>
+                    <?php echo $form->$params[2]($array[0],$array[1],$array[2],isset($array[3])?$array[3]:array());?>
                     <div class="clear"></div>
-                <?php }
+           <?php }
+            elseif ($params[0]=='many') {
+                //echo '123';
+                $fmodel = $array[0]->parametersMany;
+                //echo $form->textField($fmodel,'value');
+                foreach ($fmodel as $parameter => $value) {
+                    //echo $form->$v['function']($v['model'],$v['attribute'],$v['data'],isset($v['htmlOptions'])?$v['htmlOptions']:array());
+                ?>
+                <label for="ShopProducts[parametersMany][<?=$parameter?>]"><?=$value;?></label>
+                <input type="text" value="" maxlength="255" id="ShopProducts_Many_<?=$parameter?>" name="ShopProducts[parametersMany][<?=$parameter?>]">
+            <?php } }
             else {
-                echo $form->$params[2]($array[0],$array[1],$array[2],@$array[3]);
+                echo $form->$params[2]($array[0],$array[1],$array[2],isset($array[3])?$array[3]:array());
 
             } ?>
             <?php if ($params[0]=='elrte') {
-                $height = (@$params[3]) ? $params[3] : 100;
+                $height = (isset($params[3]) AND $params[3]) ? $params[3] : 100;
                 ?>
                 <div class="hint"><a onclick="return setupElrteEditor('<?=get_class($model).'_'.$field?>', this, 'compant', '<?=$height?>');">WYSIWYG</a></div>
             <?php } ?>
