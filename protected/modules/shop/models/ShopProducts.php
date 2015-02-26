@@ -65,7 +65,7 @@ class ShopProducts extends ActiveRecord
             'price'           => array('input c'),
             'price2'          => array('input c'),
             'text'            => array('elrte c12'),
-            'parameters'      => array('many c4'),
+            'parameters'      => array('many c12'),
             'img'             => array('img c4',$this->imgConf),
             'seo'             => array('checkbox c2'),
             'url'             => array('input c4'),

@@ -85,9 +85,30 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
                 $values = $array[0]->parametersMany['values'];
                 //echo $form->textField($fmodel,'value');
                 foreach ($parameters as $parameter) {
-                ?>
-                <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
-                <input type="text" value="<?=@$values[$parameter->id]?>" maxlength="255" id="ShopProducts_Many_<?=$parameter->id?>" name="ShopProducts[parametersMany][<?=$parameter->id?>]">
+                    if ($parameter->type==4) {
+                        $options = explode("\r\n",trim($parameter->values));
+                        ?>
+                        <div class="row select c2 ">
+                            <label class="required" for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
+                            <div>
+                                <select id="ShopProducts_brand" name="ShopProducts[parametersMany][<?=$parameter->id?>]" class="select">
+                                    <?php foreach ($options as $v) {
+                                        $selected = ($v==@$values[$parameter->id]) ? 'selected="selected"' : '';                                        ?>
+                                    <option <?=$selected;?> value="<?=htmlspecialchars($v);?>"><?=$v;?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+
+
+                    <div class="row input c ">
+                        <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
+                        <div>
+                            <input type="text" value="<?=@$values[$parameter->id]?>" maxlength="255" id="ShopProducts_Many_<?=$parameter->id?>" name="ShopProducts[parametersMany][<?=$parameter->id?>]">
+                        </div>
+                    </div>
+                    <?php } ?>
             <?php } }
             else {
                 echo $form->$params[2]($array[0],$array[1],$array[2],isset($array[3])?$array[3]:array());
