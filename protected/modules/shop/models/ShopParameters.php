@@ -36,6 +36,7 @@ class ShopParameters extends ActiveRecord
         return array(
             'parameters'=>array(self::MANY_MANY, 'ShopCategories',
                 'shop_parameters__categories(child, parent)'),
+            'values'=>array(self::HAS_MANY, 'ShopProductValues','parameter'),
         );
 	}
 

@@ -109,11 +109,16 @@ class ShopProducts extends ActiveRecord
         if ($this->parameters_many===null)
             //$this->parameters_many = CHtml::listData(ShopProductValues::model()->findAllByAttributes(array('product'=>$this->id)),'parameter', 'value');
             $query = "
-                SELECT sp.id, sp.name
+                SELECT sp.id, sp.name, sp.type
                 FROM shop_parameters sp
                 LEFT JOIN shop_parameters__categories spc ON spc.parent=:category
                 "; //echo $query;
-        $this->parameters_many = CHtml::listData(ShopParameters::model()->findAllBySql($query,array(':category'=>$this->category)),'id', 'name');
+        //$this->parameters_many = CHtml::listData(ShopParameters::model()->findAllBySql($query,array(':category'=>$this->category)),'id', 'name', 'type');
+        //$th = CHtml::listData(ShopParameters::model()->findAllBySql($query,array(':category'=>$this->category)),'id', 'attributes');
+        //$this->parameters_many = ShopParameters::model()->with('parameters','values')->findAll('parameters.id=:category AND values.product=:product', array(':category'=>$this->category, ':product'=>$this->id));
+        $parameters = ShopParameters::model()->with('parameters')->findAll('parameters.id=:category', array(':category'=>$this->category));
+        $values = CHtml::listData(ShopProductValues::model()->findAll('product=:product', array(':product'=>$this->id)),'parameter','value');
+        $this->parameters_many = array('parameters'=>$parameters, 'values'=>$values);
         return $this->parameters_many;
     }
 
@@ -122,6 +127,22 @@ class ShopProducts extends ActiveRecord
         $this->parameters_many=$value;
     }
 
+    protected function afterSave(){
+        foreach ($this->parameters_many as $parameter => $value) {
+            //$values = new ShopProductValues();
+            if (ShopProductValues::model()->exists('product=:product AND parameter=:parameter', array(':product'=>$this->id,':parameter'=>$parameter))) {
+                $values = ShopProductValues::model()->find('product=:product AND parameter=:parameter', array(':product'=>$this->id,':parameter'=>$parameter));
+            }
+            else {
+                $values = new ShopProductValues();
+                $values->product = $this->id;
+                $values->parameter = $parameter;
+            }
+            $values->value = $value;
+            $values->save();
+        }
+        parent::afterSave();
+    }
     /**
     * @return string the associated database table name
     */

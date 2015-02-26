@@ -81,13 +81,13 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
            <?php }
             elseif ($params[0]=='many') {
                 //echo '123';
-                $fmodel = $array[0]->parametersMany;
+                $parameters = $array[0]->parametersMany['parameters'];
+                $values = $array[0]->parametersMany['values'];
                 //echo $form->textField($fmodel,'value');
-                foreach ($fmodel as $parameter => $value) {
-                    //echo $form->$v['function']($v['model'],$v['attribute'],$v['data'],isset($v['htmlOptions'])?$v['htmlOptions']:array());
+                foreach ($parameters as $parameter) {
                 ?>
-                <label for="ShopProducts[parametersMany][<?=$parameter?>]"><?=$value;?></label>
-                <input type="text" value="" maxlength="255" id="ShopProducts_Many_<?=$parameter?>" name="ShopProducts[parametersMany][<?=$parameter?>]">
+                <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
+                <input type="text" value="<?=@$values[$parameter->id]?>" maxlength="255" id="ShopProducts_Many_<?=$parameter->id?>" name="ShopProducts[parametersMany][<?=$parameter->id?>]">
             <?php } }
             else {
                 echo $form->$params[2]($array[0],$array[1],$array[2],isset($array[3])?$array[3]:array());
