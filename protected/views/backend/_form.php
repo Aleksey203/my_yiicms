@@ -2,6 +2,7 @@
 /* @var $this PostController */
 /* @var $model Post */
 /* @var $form CActiveForm */
+Yii::trace("Начало рендеринга шаблона _form",'system.base.CModule');
 ?>
 
 <div class="form" data-url="<?=Yii::app()->controller->uniqueId;?>" data-id="<?=$model->id;?>">
@@ -85,13 +86,13 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
                 $values = $array[0]->parametersMany['values'];
                 //echo $form->textField($fmodel,'value');
                 foreach ($parameters as $parameter) {
-                    if ($parameter->type==4) {
+                    if ($parameter->type==AdminConf::getConfArray('attrTypesIdFunc','dropDownList')) {
                         $options = explode("\r\n",trim($parameter->values));
                         ?>
                         <div class="row select c2 ">
-                            <label class="required" for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
+                            <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
                             <div>
-                                <select id="ShopProducts_brand" name="ShopProducts[parametersMany][<?=$parameter->id?>]" class="select">
+                                <select id="ShopProducts_parameters_[<?=$parameter->id?>]" name="ShopProducts[parametersMany][<?=$parameter->id?>]" class="select">
                                     <?php foreach ($options as $v) {
                                         $selected = ($v==@$values[$parameter->id]) ? 'selected="selected"' : '';                                        ?>
                                     <option <?=$selected;?> value="<?=htmlspecialchars($v);?>"><?=$v;?></option>
@@ -99,9 +100,22 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
                                 </select>
                             </div>
                         </div>
+                    <?php } elseif ($parameter->type==AdminConf::getConfArray('attrTypesIdFunc','textArea')) { ?>
+                        <div class="row elrte c100 ">
+                            <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
+                            <div>
+                                <textarea id="ShopProducts_parameters_[<?=$parameter->id?>]" name="ShopProducts[parametersMany][<?=$parameter->id?>]" style="height:px" class="textarea"><?=@$values[$parameter->id]?></textarea>
+                            </div>
+                        </div>
+                    <?php } elseif ($parameter->type==AdminConf::getConfArray('attrTypesIdFunc','checkBox')) {
+                        $checked = (@$values[$parameter->id]==1) ? 'checked="checked"' : '';
+                        ?>
+                        <div class="row checkbox  ">
+                            <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>        <div>
+                                <input type="hidden" name="ShopProducts[parametersMany][<?=$parameter->id?>]" value="0" id="ytShopProducts_parameters_[<?=$parameter->id?>]">
+                                <input type="checkbox" <?=$checked;?> value="1" id="ShopProducts_parameters_[<?=$parameter->id?>]" name="ShopProducts[parametersMany][<?=$parameter->id?>]" class="checkbox">                    </div>
+                        </div>
                     <?php } else { ?>
-
-
                     <div class="row input c ">
                         <label for="ShopProducts[parametersMany][<?=$parameter->id?>]"><?=$parameter->name;?></label>
                         <div>
@@ -132,5 +146,6 @@ $redirect = ($this->action->id=='update') ? 'false' : 'update';
 	</div>-->
 
 <?php $this->endWidget(); ?>
+<?php Yii::trace("Окончание рендеринга шаблона _form",'system.base.CModule');?>
 
 </div><!-- form -->

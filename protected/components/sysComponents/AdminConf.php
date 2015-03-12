@@ -123,6 +123,13 @@ class AdminConf extends CComponent {
             '4' => 'dropDownList',
             '5' => 'checkBox',
         );
+        $conf['attrTypesIdFunc'] = array(
+            'textField'     => '1',
+            'intField'      => '2',
+            'textArea'      => '3',
+            'dropDownList'  => '4',
+            'checkBox'      => '5',
+        );
         if ($value) {
             return $conf[$key][$value];
         } else {

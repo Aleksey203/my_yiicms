@@ -10,8 +10,10 @@ in the "<?php /*echo $this->module->id; */?>" module.
 </p>-->
 
 <?php
+$dataProvider = $model->search();
+Yii::trace("Начало рендеринга шаблона list",'system.base.CModule');
 $this->widget('zii.widgets.grid.CGridView', array(
-    'dataProvider'=>$model->search(),
+    'dataProvider'=>$dataProvider,
     'ajaxUpdate'    => false,
     'selectableRows'    => 0,
     'columns'=>$columns,
@@ -20,4 +22,5 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'rowHtmlOptionsExpression'=>'array("data-id" => "$data->id")',
     'htmlOptions'=>array("data-model" => get_class($model),"data-url" => $this->uniqueId),
 ));
+Yii::trace("Окончание рендеринга шаблона  list",'system.base.CModule');
 ?>

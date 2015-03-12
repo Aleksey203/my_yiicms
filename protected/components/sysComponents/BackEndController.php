@@ -29,6 +29,7 @@ class BackEndController extends Controller {
 
     public function actionList()
     {
+        Yii::trace("В начале actionList",'system.base.CModule');
         $url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
         $module = Yii::app()->controller->module->id;
         $controller = Yii::app()->controller->id;
@@ -46,7 +47,12 @@ class BackEndController extends Controller {
         $model->unsetAttributes();
         if (!empty($_GET[$this->modelName]))
             $model->attributes = $_GET[$this->modelName];
-        $this->render('list',array( 'model'=>$model, 'columns'=>$model->getColumns() ));
+        Yii::log("Перед запросом getColumns()",'system.base.CModule');
+        $renderColumns = $model->getColumns();
+        Yii::log("Перед рендерингом шаблона",'system.base.CModule');
+        $this->render('list',array( 'model'=>$model, 'columns'=>$renderColumns ));
+        Yii::log("После рендеринга шаблона",'system.base.CModule');
+        //$this->render('main');
     }
 
     public function actionCreate()

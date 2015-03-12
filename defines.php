@@ -1,7 +1,7 @@
 <?
 
 error_reporting(E_ALL ^ E_NOTICE);
-defined('YII_DEBUG') or define('YII_DEBUG',true);
+//defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_DEBUG') or define('YII_DEBUG',false);
 
 if ($_SERVER['SERVER_ADDR'] == '127.0.0.1')  define('LOCALHOST',true);

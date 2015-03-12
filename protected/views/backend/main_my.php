@@ -1,4 +1,5 @@
 <?php
+Yii::log("Начало рендеринга шаблона main");
 // Register jquery and jquery ui.
 $adminAssetsUrl = Yii::app()->getModule('pages')->assetsUrl;
 
@@ -28,6 +29,7 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/extensions/elFinder-2/js/el
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/elfinder.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/highslide_conf.js');
 $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/admin.js');
+Yii::log("Окончание загрузки assetsManager шаблона main");
 ?>
 <!doctype html>
 <html>
@@ -68,3 +70,5 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/admin.js');
     </div>
 </body>
 </html>
+<?php Yii::log("Окончание рендеринга шаблона main");
+?>

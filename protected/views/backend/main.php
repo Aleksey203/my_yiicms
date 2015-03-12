@@ -1,4 +1,5 @@
 <?php
+Yii::trace("Начало рендеринга шаблона main",'system.base.CModule');
 // Register jquery and jquery ui.
 $adminAssetsUrl = Yii::app()->getModule('pages')->assetsUrl;
 
@@ -147,3 +148,4 @@ $assetsManager->registerScriptFile($adminAssetsUrl.'/scripts/jquery.hotkeys.js')
     </div>
 </body>
 </html>
+<?php Yii::trace("Окончание рендеринга шаблона main",'system.base.CModule');?>

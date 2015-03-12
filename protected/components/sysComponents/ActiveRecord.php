@@ -36,7 +36,7 @@ class ActiveRecord extends CActiveRecord {
                 unset($columns[$k]);
                 array_push($columns, array(
                     'name'              => 'display',
-                    'type'              => 'html',
+                    'type'              => 'raw',
                     'header'            => '',
                     'filterHtmlOptions' => array('class' => 'filter_display'),
                     'htmlOptions'       => array('class' => 'display'),
@@ -59,7 +59,7 @@ class ActiveRecord extends CActiveRecord {
                         'headerHtmlOptions' => array('class'=>'ta_center'),
                         'htmlOptions'       => array('class'=>'boolean'),
                         'filterHtmlOptions' => array('class' => 'filter_boolean'),
-                        'type'              => 'html',
+                        'type'              => 'raw',
                         'filter'            =>array(1=> 'Да', 0=> 'Нет'),
                         'value'=>function ($data,$row,$name) {
                                 $class = get_class($data);
@@ -90,7 +90,7 @@ class ActiveRecord extends CActiveRecord {
                 elseif ($type == 'text') {
                     $columns[$k] =  array(
                         'name'          => $name,
-                        'type'          => 'html',
+                        'type'          => 'raw',
                         'value'         => '$data->'.$name,
                         'htmlOptions'   => array('data-name'=>$column),
                     );
@@ -98,7 +98,7 @@ class ActiveRecord extends CActiveRecord {
             }         elseif (!is_array($column) AND strpos($column,'.')>0===false) {
                 $columns[$k] =  array(
                     'name'          => $column,
-                    'type'          => 'html',
+                    'type'          => 'raw',
                     'value'         => '$data->'.$column,
                     'htmlOptions'   => array('data-name'=>$column, 'class'=>($column=='id')?'id':'post'),
                 );

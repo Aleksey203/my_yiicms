@@ -392,6 +392,7 @@ select {
 .update .c10{width: 80%;}
 .update .c11{width: 88%;}
 .update .c12{width: 96%;}
+.update .c100{width: 100%;}
 
 .update .buttons{clear: both;}
 .update .form input[type="text"]:focus, .update .form input[type="password"]:focus, .update .form textarea:focus {

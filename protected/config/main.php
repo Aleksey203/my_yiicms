@@ -26,6 +26,7 @@ return array(
 		'application.components.*',
 		'application.components.sysComponents.*',
         'application.helpers.*',
+        //'application.extensions.yiidebugtb.*',
 	)),
 
 	'modules'=>array_merge($modules, array(
@@ -72,7 +73,7 @@ return array(
 		// uncomment the following to use a MySQL database
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=me',
+			'connectionString' => 'mysql:host=127.0.0.1;dbname=me',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
@@ -90,22 +91,27 @@ return array(
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
+                array(
+                    'class'=>'CFileLogRoute',
+                    'levels'=>'error, warning, trace',
+                ),
+
+                array(
+                    'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    //'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+                ),
 				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
                 /*array(
                     // направляем результаты профайлинга в ProfileLogRoute (отображается
                     // внизу страницы)
                     'class'=>'CProfileLogRoute',
-                    'levels'=>'profile',
+                    'levels'=>'error, warning, trace, profile, info',
                     'enabled'=>true,
+                ),
+                array(
+                    'class' => 'CWebLogRoute',
+                    'categories' => 'application',
+                    'levels'=>'error, warning, trace, profile, info',
                 ),*/
 			),
 		),
